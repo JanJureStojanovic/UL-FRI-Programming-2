@@ -52,3 +52,5 @@ int main() {
     
     printf("%d\n", trenutna);
 }
+
+// Test
