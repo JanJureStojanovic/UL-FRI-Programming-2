@@ -50,7 +50,7 @@ int main() {
     int kjerSmo = 0;
     int naslednja = 1;
     
-    while (d >= 0 && naslednja <= (p*q - 1)) {
+    while (d > 0) {
         for (int i = 0; i < p; i++) {
             for (int j = 0; j < q; j++) {
                 if (t[i][j] == naslednja) {
@@ -66,14 +66,20 @@ int main() {
         d -= raz;
         
         if (d >= 0) {
+            // Razdalja ni predolga in lahko se premaknemo na naslednjo tocko
             kjerSmo += 1;
+            // Naslednja tocka kamor gremo
+            naslednja += 1;
         }
         
-        // Naslednja tocka kamor gremo
-        naslednja += 1;
+        // Ce je naslednja tocka presegla najvecjo mozno, smo sli ze cez vse tocke
+        if (naslednja > (p*q - 1)) {
+            break;
+        }
         
         x1 = x2;
         y1 = y2;
+        
     }
     
     printf("%d\n", kjerSmo);
