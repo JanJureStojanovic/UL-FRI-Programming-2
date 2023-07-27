@@ -36,6 +36,7 @@ int main() {
     int* aa = calloc(10000, sizeof(int));
     int* bb = calloc(10000, sizeof(int));
     
+    // Prestavimo prvo stevlo na konec nove tabele
     for (int k = 9999; k >= 0; k--) {
         aa[k] = a[i];
         i--;
@@ -44,6 +45,7 @@ int main() {
         }
     }
     
+    // Prestavimo drugo stevilo na konec druge nove tabele
     for (int k = 9999; k >= 0; k--) {
         bb[k] = b[j];
         j--;
@@ -52,12 +54,14 @@ int main() {
         }
     }
     
+    // Sestevama od konca proti zacetku, imamo ostanek 0 na zacetku ...
     int dodatek = 0;
     for (int i = 9999; i >= 0; i--) {
         c[i] = (aa[i] + bb[i] + dodatek) % 10;
         dodatek = (aa[i] + bb[i] + dodatek)/10;
     }
     
+    // Ko najdemo prvo st., ki ni enako nic, izpisemo stevila do konca tabele 
     bool najdenoPrvo = false;
     for (int i = 0; i < 10000; i++) {
         if (c[i] != 0) {
