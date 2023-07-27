@@ -16,28 +16,49 @@
 #include <string.h>
 
 // po potrebi dopolnite ...
-
-void izpis(int* t, int n) {
-    for (int i = 0; i < n; i++) {
-        if (i != 0) {
+void izpis(int* t, int dolzina) {
+    for(int i = 0; i < dolzina; i++) {
+        if (t[i] < t[i - 1]) {
+            return;
+        }
+    }
+    for (int j = 0; j < dolzina; j++) {
+        if (j != 0) {
             printf("+");
         }
-        printf(t[i]);
+        printf("%d", t[j]);
     }
+    printf("\n");
+    return;
 }
 
-int sum(int* t, int n) {
+int vsota(int* t, int dolzina) {
     int sum = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < dolzina; i++) {
         sum += t[i];
     }
-    return sum;
+    return sum  ;
 }
 
-void rek(int n, int a, int b, int* t, int i) {
-
-
-
+void rek(int* t, int n, int dolzina, int x) {
+    if (vsota(t, dolzina) == n) {
+        izpis(t, dolzina);
+        return;
+    }
+    
+    if (x == dolzina) {
+        return;
+    }
+    
+    int* tt = malloc(dolzina*sizeof(int));
+    for (int j = 0; j < dolzina; j++) {
+        tt[j] = t[j];
+    }
+    
+    t[x];
+    tt[x]++;
+    rek(t, n, dolzina, x + 1);
+    rek(tt, n, dolzina, x);   
 }
 
 int main() {
@@ -47,12 +68,13 @@ int main() {
     // Vse mozne velikosti nasih tabel (stevilo elementov)
     for(int i = a; i <= b; i++) {
         // Tabela velikosti od a do b
-        int* t = malloc(i*sizeof(int))
-        // Dolocimo vrednosti v tabeli: a = 3, n = 5, tabela = [1, 1, 3]
-        for (int j = 0; j < i - 1; j++) {
+        int* t = malloc(i*sizeof(int));
+        
+        for (int j = 0; j < i; j++) {
             t[j] = 1;
         }
-        t[i - 1] = n - i + 1; 
-        rek(t)
+        
+        rek(t, n, i, 0);
+        
     }
 }
