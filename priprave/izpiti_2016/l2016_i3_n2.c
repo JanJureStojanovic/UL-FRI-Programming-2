@@ -17,6 +17,7 @@ int main() {
         i++;
         x = getchar();
     }
+    i--;
     
     // Shranimo stevilo b
     int j = 0;
@@ -26,6 +27,7 @@ int main() {
         j++;
         y = getchar();
     }
+    j--;
     
     // Prostor kjer bo shranjena vsota
     int* c = calloc(10000, sizeof(int));
@@ -51,9 +53,9 @@ int main() {
     }
     
     int dodatek = 0;
-    for (int i = 10000; i >= 0; i--) {
-        c[i] = (aa[i] + bb[i])%10 + dodatek;
-        dodatek = (aa[i] + bb[i])/10;
+    for (int i = 9999; i >= 0; i--) {
+        c[i] = (aa[i] + bb[i] + dodatek) % 10;
+        dodatek = (aa[i] + bb[i] + dodatek)/10;
     }
     
     bool najdenoPrvo = false;
