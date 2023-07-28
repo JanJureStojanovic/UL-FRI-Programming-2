@@ -1,4 +1,3 @@
-
 /*
  * Zagon testne skripte ("sele potem, ko ste prepri"cani, da program deluje!):
  *
@@ -15,66 +14,39 @@
 #include <stdbool.h>
 #include <string.h>
 
-// po potrebi dopolnite ...
-void izpis(int* t, int dolzina) {
-    for(int i = 0; i < dolzina; i++) {
-        if (t[i] < t[i - 1]) {
-            return;
+void print_combinations(int arr[], int n, int a, int b, int index, int sum){
+
+    if(sum == n && index >= a && index <= b) {
+        for(int i = 0; i < index; i++) {
+            printf("%d", arr[i]);
+            if(i < index - 1) { // Samo na koncu ne napisemo plusa
+                printf("+");
+            }
+        }
+        printf("\n");
+        
+    } else if(sum < n && index < b) {
+        int prev;
+        if(index == 0){
+            prev = 1;
+        } else {
+            prev = arr[index-1];
+        }
+        for(int i = prev; i <= n - sum; i++) {
+            arr[index] = i;
+            print_combinations(arr,n,a,b,index+1,sum+i);
         }
     }
-    for (int j = 0; j < dolzina; j++) {
-        if (j != 0) {
-            printf("+");
-        }
-        printf("%d", t[j]);
-    }
-    printf("\n");
-    return;
 }
 
-int vsota(int* t, int dolzina) {
-    int sum = 0;
-    for (int i = 0; i < dolzina; i++) {
-        sum += t[i];
-    }
-    return sum  ;
-}
+int main(){
 
-void rek(int* t, int n, int dolzina, int x) {
-    if (vsota(t, dolzina) == n) {
-        izpis(t, dolzina);
-        return;
-    }
+    int n,a,b;
+    scanf("%d %d %d",&n,&a,&b);
     
-    if (x == dolzina) {
-        return;
-    }
+    int arr[b];
     
-    int* tt = malloc(dolzina*sizeof(int));
-    for (int j = 0; j < dolzina; j++) {
-        tt[j] = t[j];
-    }
+    print_combinations(arr,n,a,b,0,0);
     
-    t[x];
-    tt[x]++;
-    rek(t, n, dolzina, x + 1);
-    rek(tt, n, dolzina, x);   
-}
-
-int main() {
-    int n, a, b;
-    scanf("%d %d %d", &n, &a, &b);
-
-    // Vse mozne velikosti nasih tabel (stevilo elementov)
-    for(int i = a; i <= b; i++) {
-        // Tabela velikosti od a do b
-        int* t = malloc(i*sizeof(int));
-        
-        for (int j = 0; j < i; j++) {
-            t[j] = 1;
-        }
-        
-        rek(t, n, i, 0);
-        
-    }
+    return 0;
 }
