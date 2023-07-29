@@ -25,7 +25,7 @@ void print_combinations(int arr[], int n, int a, int b, int index, int sum){
         }
         printf("\n");
         
-    } else if(sum < n && index < b) {
+    } else if(sum < n && index < b) { // Kako deluje nasa rekurzija
         int prev;
         if(index == 0){
             prev = 1;
