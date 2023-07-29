@@ -1,3 +1,4 @@
+
 /*
  * Prevajanje in zagon testnega programa testXY.c:
  *
@@ -11,7 +12,7 @@
  *
  * Testni primeri:
  * 02, 03: h = 1
- * 04, 05, 06: preverjajo samo vsoto
+ * 04, 05, 06: mesto = 0
  * 01, 07--10: splo"sni
  */
 
@@ -24,219 +25,145 @@
 
 // po potrebi dopolnite ...
 
-Vozlisce* diagonala(Vozlisce* start, int* vsota) {
-        Vozlisce* zacetek=start;
-        Vozlisce* temp = start;
+Vozlisce* vstaviStolpec(Vozlisce* start, int mesto, int vsebina){
+    
+    Vozlisce* temp = start;
 
-        int dolzina=0;
-        int visina=0;
+    int stevec = 0;
+    while (temp!=NULL){
+        stevec++;
+        temp=temp->desno;
+    }
+    temp=start;
 
-        while(temp!=NULL){
-            dolzina++;
-            temp=temp->desno;
+    Vozlisce* first=temp;
+    Vozlisce* last=temp;
+
+    for (int i=0; i<mesto-1; i++){
+        first=first->desno;
+    }
+
+
+    // return first;
+
+    for (int i=0; i<mesto; i++){
+        last=last->desno;
+    }
+
+    // return last;
+
+if (mesto==0){
+    first=start;
+    Vozlisce* prior = NULL;
+    int counter = vsebina;
+
+    for (int i=0; first!=NULL; i++){
+        if (i==0){
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=first;
+            new->dol=NULL;
+
+            start = new;
+            prior = new;
         }
-        temp=start;
-        while (temp!=NULL){
-            temp=temp->dol;
-            visina++;
+        else{
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=first;
+            new->dol=NULL;
+
+            prior->dol=new;
+            prior=new;
         }
+        first=first->dol;
+    }
 
-        temp=start;
+}
 
-        Vozlisce** seznam = malloc(200*sizeof(Vozlisce*));
-        int stevec = 0;
-        while (temp!=NULL){
-            seznam[stevec]=temp;
-            // printf("[%d.%d] ", temp->vsebina,stevec);
-            stevec++;
-            temp=temp->desno;
+else if (mesto!=stevec){
+    Vozlisce* priorNew=NULL;
+
+    int counter = vsebina;
+    for (int i=0; first!=NULL; i++){
+        if (i==0){
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=last;
+            new->dol=NULL;
+
+            first->desno=new;
+
+            priorNew=new;
         }
+        else{
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=last;
+            new->dol=NULL;
 
-        // printf("%d ",stevec);
+            priorNew->dol=new;
 
-        int* stevilke=malloc(200*sizeof(int));
-        int stCount=0;
+            first->desno=new;
 
-        int premik=0;
-        while (stevec>0 && visina>0){
-            temp=seznam[stevec-1];
-            int move = premik;
-            while(move!=0){
-                if (temp->dol!=NULL){
-                    temp=temp->dol;
-                    move--;
-                }
-                else{
-                    move--;
-                }
-            }
-            int current = temp->vsebina;
-            stevilke[stCount]=current;
-            stCount++;
-            stevec--;
-            premik++;
-            visina--;
+            priorNew=new;
+
         }
+            
 
-        int sum=0;
-        for (int i=0;i<stCount; i++){
-            // printf("%d ",stevilke[i]);
-            sum+=stevilke[i];
+        first=first->dol;
+        last=last->dol;
+    }
+}
+
+else{
+    Vozlisce* prior = NULL;
+    int counter = vsebina;
+
+    for (int i=0; first!=NULL; i++){
+        if (i==0){
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=NULL;
+            first->desno=new;
+
+            prior = new;
         }
+        else{
+            Vozlisce* new = malloc(1*sizeof(Vozlisce));
+            new->vsebina=counter;
+            counter++;
+            new->desno=NULL;
+            first->desno=new;
+            prior->dol=new;
 
-        *vsota=sum;
-
-        Vozlisce* newstart=malloc(sizeof(Vozlisce));
-        Vozlisce* prev=malloc(sizeof(Vozlisce));
-        for (int i=0; i<stCount; i++){
-            if (i==0){
-                newstart->dol=NULL;
-                newstart->desno=NULL;
-                newstart->vsebina=stevilke[i];
-                prev=newstart;
-            }
-            else{
-                Vozlisce* novo = malloc(sizeof(Vozlisce));
-                novo->desno=NULL;
-                novo->dol=NULL;
-                novo->vsebina=stevilke[i];
-                prev->desno=novo;
-                prev=novo;
-            }
+            prior = new;
         }
+        first=first->dol;
+    }
+}
+
+            
+    return start;
 
 
 
 
-        
-        
-        start=zacetek;
-        return newstart;
-
-        
 }
 
 //=============================================================================
 
 #ifndef test
 
-#define _VISINA 3
-#define _SIRINA 4
-
-Vozlisce* _MATRIKA[_VISINA][_SIRINA];
-
-const int _VSEBINA[_VISINA][_SIRINA] = {
-    {1, 2, 3, 4},
-    {5, 6, 7, 8},
-    {9, 10, 11, 12},
-};
-
-void _napolni() {
-    for (int i = 0; i < _VISINA; i++) {
-        for (int j = 0; j < _SIRINA; j++) {
-            _MATRIKA[i][j] = calloc(1, sizeof(Vozlisce));
-            _MATRIKA[i][j]->vsebina = _VSEBINA[i][j];
-        }
-    }
-    for (int i = 0; i < _VISINA; i++) {
-        for (int j = 0; j < _SIRINA; j++) {
-            if (j < _SIRINA - 1) {
-                _MATRIKA[i][j]->desno = _MATRIKA[i][j + 1];
-            }
-            if (i < _VISINA - 1) {
-                _MATRIKA[i][j]->dol = _MATRIKA[i + 1][j];
-            }
-        }
-    }
-}
-
-void _izpisiDiagonalo(Vozlisce* v) {
-    printf("Diagonala:\n");
-    printf("[");
-    Vozlisce* w = v;
-    while (w != NULL) {
-        if (w != v) {
-            printf(", ");
-        }
-        printf("%d", w->vsebina);
-        w = w->desno;
-    }
-    printf("]\n\n");
-}
-
-void _izpisiOriginal(Vozlisce* v0) {
-    printf("Originalna matrika -- po vrsticah:\n");
-    Vozlisce* v = v0;
-    int i = 0;
-    while (v != NULL) {
-        printf("%d: [", i);
-        Vozlisce* w = v;
-        while (w != NULL) {
-            if (w != v) {
-                printf(", ");
-            }
-            printf("%d", w->vsebina);
-            w = w->desno;
-        }
-        printf("]\n");
-        v = v->dol;
-        i++;
-    }
-
-    printf("\n");
-    printf("Originalna matrika -- po stolpcih:\n");
-    v = v0;
-    i = 0;
-    while (v != NULL) {
-        printf("%d: [", i);
-        Vozlisce* w = v;
-        while (w != NULL) {
-            if (w != v) {
-                printf(", ");
-            }
-            printf("%d", w->vsebina);
-            w = w->dol;
-        }
-        printf("]\n");
-        v = v->desno;
-        i++;
-    }
-}
-
-void _pocistiDiagonalo(Vozlisce* v) {
-    while (v != NULL) {
-        Vozlisce* temp = v->desno;
-        free(v);
-        v = temp;
-    }
-}
-
-void _pocistiOriginal(Vozlisce* v0) {
-    Vozlisce* v = v0;
-    while (v != NULL) {
-        Vozlisce* w = v;
-        while (w != NULL) {
-            Vozlisce* temp = w->desno;
-            free(w);
-            w = temp;
-        }
-        v = v->dol;
-    }
-}
-
 int main() {
-    _napolni();
-    int vsota = 0;
-    Vozlisce* diag = diagonala(_MATRIKA[0][0], &vsota);
-
-    printf("vsota = %d\n\n", vsota);
-
-    _izpisiDiagonalo(diag);
-    _izpisiOriginal(_MATRIKA[0][0]);
-
-    _pocistiDiagonalo(diag);
-    _pocistiOriginal(_MATRIKA[0][0]);
-
+    // "Ce "zelite funkcijo <vstaviStolpec> testirati brez testnih primerov,
+    // dopolnite to funkcijo in prevedite datoteko na obi"cajen na"cin
+    // (gcc naloga3.c).
     return 0;
 }
 
