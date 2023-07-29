@@ -23,12 +23,9 @@
 
 #include "naloga3.h"
 
-// po potrebi dopolnite ...
-
 Vozlisce* vstaviStolpec(Vozlisce* start, int mesto, int vsebina){
     
     Vozlisce* i = start;
-    
     Vozlisce* leviStolpec;
     
     if (mesto != 0) {
@@ -61,15 +58,16 @@ Vozlisce* vstaviStolpec(Vozlisce* start, int mesto, int vsebina){
             // Prestavimo se dol na spodnje vozslice na levem stolpcu
             leviStolpec = leviStolpec->dol;
             
-            // Nastavimo se pointer dol in se prestavimo dol 
-            trenutno->dol = spodnje;
-            trenutno = trenutno->dol;
+            if (leviStolpec != NULL) {
+                // Nastavimo se pointer dol in se prestavimo dol 
+                trenutno->dol = spodnje;
+                trenutno = trenutno->dol;
+            }
             
         }
         return start;
     }
-    
-    // Tukej Dela
+
     if (mesto == 0 ) {
         Vozlisce* j = start;
         Vozlisce* trenutno = malloc(1*sizeof(Vozlisce));
@@ -93,14 +91,10 @@ Vozlisce* vstaviStolpec(Vozlisce* start, int mesto, int vsebina){
         }
         return out;
     }
-    return i;
     
-    /*        
-    KO NADALJUJES NALOGO, PREMISLI KAJ BO Z 'LEVISTOLPEC' CE JE MESTO == 0
-    PREMISLI KAKO BI PREVERIL ALI JE MESTO 0, NE DA BI PREMIKAL VSE SKUPAJ
-    KDAJ JE TREBA IMETI 'LEVISTOLPEC'
-    ZAKAJ TO S 'SPODNJE' NE DELUJE?        
-    */
+    // This return never happens, Its here just to avoid an error :/
+    return i;
+
 }
 
 //=============================================================================
