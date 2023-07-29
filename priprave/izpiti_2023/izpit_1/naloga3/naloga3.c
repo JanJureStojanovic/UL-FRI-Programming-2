@@ -27,133 +27,80 @@
 
 Vozlisce* vstaviStolpec(Vozlisce* start, int mesto, int vsebina){
     
-    Vozlisce* temp = start;
-
-    int stevec = 0;
-    while (temp!=NULL){
-        stevec++;
-        temp=temp->desno;
-    }
-    temp=start;
-
-    Vozlisce* first=temp;
-    Vozlisce* last=temp;
-
-    for (int i=0; i<mesto-1; i++){
-        first=first->desno;
-    }
-
-
-    // return first;
-
-    for (int i=0; i<mesto; i++){
-        last=last->desno;
-    }
-
-    // return last;
-
-if (mesto==0){
-    first=start;
-    Vozlisce* prior = NULL;
-    int counter = vsebina;
-
-    for (int i=0; first!=NULL; i++){
-        if (i==0){
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=first;
-            new->dol=NULL;
-
-            start = new;
-            prior = new;
+    Vozlisce* i = start;
+    
+    Vozlisce* leviStolpec;
+    
+    if (mesto != 0) {
+    
+        for (int j = 0; j < mesto-1; j++) {
+            i = i->desno;
         }
-        else{
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=first;
-            new->dol=NULL;
-
-            prior->dol=new;
-            prior=new;
-        }
-        first=first->dol;
-    }
-
-}
-
-else if (mesto!=stevec){
-    Vozlisce* priorNew=NULL;
-
-    int counter = vsebina;
-    for (int i=0; first!=NULL; i++){
-        if (i==0){
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=last;
-            new->dol=NULL;
-
-            first->desno=new;
-
-            priorNew=new;
-        }
-        else{
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=last;
-            new->dol=NULL;
-
-            priorNew->dol=new;
-
-            first->desno=new;
-
-            priorNew=new;
-
-        }
+        leviStolpec=i;
+        
+        // Ce imamo samo eno vrstico
+        if (leviStolpec->dol == NULL) {
+            Vozlisce* novo = malloc(1*sizeof(Vozlisce));
+            novo->vsebina = vsebina;
+            novo->desno = leviStolpec->desno;
+            leviStolpec->desno = novo;
+            novo->dol = NULL;
+            return start;
+        }  
+        
+        Vozlisce* trenutno = malloc(1*sizeof(Vozlisce));
+        while(leviStolpec != NULL) {
+            Vozlisce* spodnje = malloc(1*sizeof(Vozlisce));
+            // Nastavimo vrednosti novih vozlisc
+            trenutno->vsebina = vsebina;
+            vsebina++;
+            trenutno->desno = leviStolpec->desno;
+            // Popravimo levo vozlisce
+            leviStolpec->desno = trenutno;
             
-
-        first=first->dol;
-        last=last->dol;
-    }
-}
-
-else{
-    Vozlisce* prior = NULL;
-    int counter = vsebina;
-
-    for (int i=0; first!=NULL; i++){
-        if (i==0){
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=NULL;
-            first->desno=new;
-
-            prior = new;
-        }
-        else{
-            Vozlisce* new = malloc(1*sizeof(Vozlisce));
-            new->vsebina=counter;
-            counter++;
-            new->desno=NULL;
-            first->desno=new;
-            prior->dol=new;
-
-            prior = new;
-        }
-        first=first->dol;
-    }
-}
-
+            // Prestavimo se dol na spodnje vozslice na levem stolpcu
+            leviStolpec = leviStolpec->dol;
             
-    return start;
-
-
-
-
+            // Nastavimo se pointer dol in se prestavimo dol 
+            trenutno->dol = spodnje;
+            trenutno = trenutno->dol;
+            
+        }
+        return start;
+    }
+    
+    // Tukej Dela
+    if (mesto == 0 ) {
+        Vozlisce* j = start;
+        Vozlisce* trenutno = malloc(1*sizeof(Vozlisce));
+        Vozlisce* out = trenutno;
+        while(j != NULL) {
+            // Naredimo spodnje vozlisce
+            Vozlisce* spodnje = malloc(1*sizeof(Vozlisce));
+            // Nastavimo vrednosti novih vozlisc
+            trenutno->vsebina = vsebina;
+            vsebina++;
+            trenutno->desno = j;
+            
+            // Prestavimo se dol na spodnje vozslice na levem stolpcu
+            j = j->dol;
+            if (j != NULL) {
+                // Nastavimo se pointer dol in se prestavimo dol 
+            trenutno->dol = spodnje;
+            trenutno = trenutno->dol;
+            }
+            
+        }
+        return out;
+    }
+    return i;
+    
+    /*        
+    KO NADALJUJES NALOGO, PREMISLI KAJ BO Z 'LEVISTOLPEC' CE JE MESTO == 0
+    PREMISLI KAKO BI PREVERIL ALI JE MESTO 0, NE DA BI PREMIKAL VSE SKUPAJ
+    KDAJ JE TREBA IMETI 'LEVISTOLPEC'
+    ZAKAJ TO S 'SPODNJE' NE DELUJE?        
+    */
 }
 
 //=============================================================================
