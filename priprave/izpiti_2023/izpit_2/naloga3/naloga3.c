@@ -27,68 +27,75 @@
 
 Vozlisce* diagonala(Vozlisce* start, int* vsota) {
     
-    
+    // Vozlisca namenjena stetju sirine in visine
     Vozlisce* a = start;
     Vozlisce* b = start;
     
+    // Prestejemo visino
     int w = 0;
     while (a != NULL) {
         w++;
         a = a-> desno;
     }
     
+    // Prestejemo dolzino
     int h = 0;
     while (b != NULL) {
         h++;
         b = b -> dol;
     }
     
+    // Naredimo tabelo, ki bo hranila nase vrednosti in shranimo njeno dolzino
     int* vrednosti = (h > w) ? malloc(w*sizeof(int)) : malloc(h*sizeof(int));
     int dolzina = (h > w) ? w : h;
     
-    Vozlisce* premikDol = start;
+    // Najdemo vrenosti -> dva for loop-a, stalno preverjamo njuno legitimnost
+    Vozlisce* premikDol = start; // Vozlisce namenjeno premiku dol
     for (int i = 0; i < dolzina; i++) {
+        
+        // Vozlisce namenjeno premikanju desno, da dobimo diagonalo
         Vozlisce* premikDesno = premikDol;
         
         for (int j = 0; j < w - 1; j++) {
-            premikDesno = premikDesno->desno;
+            premikDesno = premikDesno->desno; // Premiki desno do vrednosti
         }
         // Dodamo vrenost
         vrednosti[i] = premikDesno->vsebina;
         // Premaknemo se dol
         premikDol = premikDol->dol; 
-        
+        // Ce ne moramo vec dol, smo koncali (imamo vse vrednosti)
         if (premikDol == NULL) {
             break;
         }
         
         // Premikali se bomo eno manj desno
         w = w - 1;
-        if (w == 0) { // Smo konec
+        if (w == 0) { // Ce ne moramo vec levo (po diagonali) smo koncali -> imamo vse vrednosti
             break;
         }
     }
     
     Vozlisce* trenutno = malloc(sizeof(Vozlisce));
-    Vozlisce* out = trenutno;
-    int sum = 0;
+    Vozlisce* out = trenutno; // Pointer na nas nov povezan seznam vozlisc
+    int sum = 0; // Sum counter
+    // Izdelava nasega povezanega seznama
     for (int i = 0; i < dolzina; i++) {
         sum += vrednosti[i];
         Vozlisce* naslednje = malloc(sizeof(Vozlisce));
         
         trenutno->vsebina = vrednosti[i];
         
-        
+        // Na koncu ne dodamo pointerja naprej, mora ostati null, zato ni premika
         if (i != dolzina-1) {
             trenutno->desno = naslednje;
         } else {
-            break;
+            break; // Ne dodamo pointerja -> smo zakljucili
         }
         trenutno = trenutno->desno;
     }
     
-    *vsota = sum;
-    return out;
+    *vsota = sum; // Nastavimo da pointer vsota kaze na presteto vsoto
+    return out; // Return value je pointer na nas nov povzean seznam vozlisc
 }
         
 
