@@ -66,6 +66,13 @@ int rekurzija(int sum, int* nums, int a, int b, int len, int kjeSmo, int vr) {
             d = rekurzija(sum, numsx, a, b, len, kjeSmo - i, vr + 1);
         }
      }   
+     
+     /*
+     KO NADALJUJES S TO NALOGO PROBAJ:
+     BREZ IZPISOVANJA ELEMENTOV PO VRSTI, SAMO PREVERIS CE SI BIL NA VSEH INDEKSIH
+     IZPISES VSOTO (ALTERNATIVE)
+     VOID FUNKCIJA S POINTERJEM?     
+     */
        
      return c + d; 
 
