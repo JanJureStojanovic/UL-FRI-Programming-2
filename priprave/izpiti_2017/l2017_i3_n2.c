@@ -38,3 +38,5 @@ int main() {
     }
     printf("\n");
 }
+
+//need fixing cuz 0 in the middle stevka doesnt wortk which is shit
