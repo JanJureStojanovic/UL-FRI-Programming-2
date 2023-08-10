@@ -28,6 +28,9 @@ int main() {
             continue;
         }
         if (currDeljenec < del) {
+            if (j != 0) {
+                printf("0");
+            }
             currDeljenec *= 10;
             j++;
             currDeljenec += st[j];
@@ -39,4 +42,4 @@ int main() {
     printf("\n");
 }
 
-//need fixing cuz 0 in the middle stevka doesnt wortk which is shit
+
