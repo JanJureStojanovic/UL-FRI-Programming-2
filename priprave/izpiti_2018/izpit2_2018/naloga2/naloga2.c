@@ -17,6 +17,20 @@ Vozlisce* vstaviUrejeno(Vozlisce* zacetek, int element) {
         return novo;
     }
     
+    if (zacetek->n == NULL) {
+        if (element < zacetek->podatek) {
+            Vozlisce* novo = malloc(1*sizeof(Vozlisce));
+            novo->podatek = element;
+            novo->n = zacetek;
+            return novo;
+        } else {
+            Vozlisce* novo = malloc(1*sizeof(Vozlisce));
+            novo->podatek = element;
+            zacetek->n = novo;
+            return zacetek;
+        }
+    }
+    
     // Naredimo novo vozlsice, ki ga bomo vstavili v seznam
     Vozlisce* novo = malloc(1*sizeof(Vozlisce));
     novo->podatek = element;
