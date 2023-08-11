@@ -36,9 +36,6 @@ Vozlisce* odstrani(Vozlisce* osnova, Vozlisce* indeksi) {
         } else {
             i = i->naslednje;
         }
-        
-        
-        
         kjeSmo++;
     }
     
@@ -49,8 +46,6 @@ Vozlisce* odstrani(Vozlisce* osnova, Vozlisce* indeksi) {
     return osnova;
 } 
     
-    
-
 int main() {
     // po "zelji dodajte kodo za ro"cno testiranje ...
     // add manual testing code if desired ...
