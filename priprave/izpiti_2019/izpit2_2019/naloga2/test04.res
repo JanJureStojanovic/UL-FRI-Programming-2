@@ -1,0 +1,15 @@
+Anej/6
+Darija/72
+Edina/95
+Gaia/27
+Husein/57
+Jovan/85
+Karel/8
+Lian/24
+Milena/46
+Neva/38
+Robi/88
+Stanka/10
+Tai/94
+Valter/98
+Zlata/28

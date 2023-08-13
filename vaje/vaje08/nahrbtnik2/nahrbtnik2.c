@@ -18,7 +18,7 @@ int return_price(int v, int n, int* volume, int* price, int x, int l) {
         if (b > a) {
             a = b;
         }
-    }
+    } 
 
     return a;
 
@@ -28,7 +28,7 @@ int main() {
 
     // Skeniramo parametre
 	int v, n, l;
-	scanf("%d", &v);
+	scanf("%d", &v);   
     scanf("%d", &n);
     scanf("%d", &l);
 
