@@ -9,35 +9,35 @@ void print(int* num1, int n) {
     printf("\n");
 }
 
-bool presegamo(int* num1, int* num2, int n) {
+bool prevecMinus(int* manjse, int* vecje, int n) {
     for (int i = 0; i < n; i++) {
-        if (num1[i] > num2[i]) {
+        if (manjse[i] > vecje[i]) { // Nasli smo kje smo z manjsim vecji 
             return true;
         }
     }
     return false;
 }
 
-void izpis(int* num1, int*num2, int i, int n) {
+void izpis(int* manjse, int* vecje, int i, int n) {
+    
     if (i == n) {
-        print(num1, n);
+        print(vecje, n);
         return;
     }
-    if (presegamo(num1, num2, n) == true) {
+    
+    if (prevecMinus(manjse, vecje, n) == true) {
         return;
     } 
     
-    
-    
-    int* newNum1 = malloc(n*sizeof(int));
+    int* novoVecje = malloc(n*sizeof(int));
     
     for (int l = 0; l < n; l++) {
-        newNum1[l] = num1[l];
+        novoVecje[l] = vecje[l];
     }
-    num1[i] += 1;
+    vecje[i] -= 1;
     
-    izpis(num1, num2, i, n);
-    izpis(newNum1, num2, i+1, n);
+    izpis(manjse, vecje, i, n);
+    izpis(manjse, novoVecje, i+1, n);
     
 }
 

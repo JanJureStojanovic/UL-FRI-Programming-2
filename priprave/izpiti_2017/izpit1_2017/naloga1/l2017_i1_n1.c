@@ -17,24 +17,37 @@ int main() {
     
     int finalSum = 0;
     int st = 0;
+    bool pripisi;
     
     for (int j = 0; j < i; j++) {
+    
+        pripisi = true;
         st = 0;
-        if((j == 0 && ('0' <= niz[j] && niz[j] <= '9')) || (niz[j - 1] == ' ' && ('0' <= niz[j] && niz[j] <= '9'))) {
-            
-            while(niz[j] != ' ' || niz[j] != '\n') {
-                if ('0' > niz[j] || niz[j] > '9') {
-                    break;
-                }
+        
+        if(j == 0 && ('0' <= niz[j] && niz[j] <= '9')) {
+            st = niz[j] - '0';
+            j++;
+            while((niz[j] != ' ' || niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) { // Prisli smo do presledka
                 st *= 10;
                 st += niz[j] - '0';
                 j++;
             }
-        }
+            finalSum += st;
+            continue;
+        } 
         
-        finalSum += st;
+        if (niz[j - 1] == ' ' && ('0' <= niz[j] && niz[j] <= '9')) {
+            st = niz[j] - '0';
+            j++;
+            while((niz[j] != ' ' || niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) { // Prisli smo do presledka
+                st *= 10;
+                st += niz[j] - '0';
+                j++;
+            }   
+            finalSum += st;
+            continue;
+        }     
     }
-
     printf("%d\n", finalSum);
 }
 
