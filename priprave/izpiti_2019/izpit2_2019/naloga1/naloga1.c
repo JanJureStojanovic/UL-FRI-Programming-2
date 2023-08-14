@@ -19,10 +19,11 @@ int main() {
     FILE* read = fopen(in, "r");
     FILE* write = fopen(out, "w");
     
-    int value1, value2, value3;
+    unsigned char byte1;
 
-    // Read groups of three hexadecimal values from the file
-    while (fscanf(read, "%x %x %x", &value1, &value2, &value3) == 3) {
-        printf("Values: %d %d %d\n", value1, value2, value3);
+    while (fread(&byte1, 1, 1, read) == 1) {
+        printf("The numerical value of myChar is: %u\n", byte1);
     }
+
+    fclose(read);
 }

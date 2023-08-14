@@ -25,11 +25,42 @@ test06..test15: primeri z n > 12
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 // Lahko dodate "se kak #include, pomo"zno funkcijo ipd.
 
 int main() {
-    // dopolnite ...
-
-    return 0;
+    
+    int n, a, b, c, d; // Po visini gremo od a -> c, po sirini pa b -> d ... pravokotnik
+    scanf("%d %d %d %d %d", &n, &a, &b, &c, &d);
+    
+    int len = 1 << n;
+    
+    int** vzorec = calloc(len, sizeof(int*));
+    for (int i = 0; i < len; i++) {
+        vzorec[i] = calloc(len, sizeof(int));
+    }
+    
+    for (int i = 0; i < len; i += 2) {
+        
+        for (int j = i; j < len; j += 2) {
+            vzorec[i][j] = 1;   
+            vzorec[i][j + 1] = 1;
+            vzorec[i + 1][j + 1] = 1; 
+        }
+    }
+    
+    for (int i = 0; i < len; i++) {
+        for (int j = 0; j < len; j++) {
+            printf("%d ", vzorec[i][j]); 
+        }
+        printf("\n");  
+    }    
 }
+
+
+
+
+
+
+
