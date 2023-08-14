@@ -34,9 +34,21 @@ test05..test10: splo"sni primeri
 //============================================================================
 
 int dolzinaCikla(Vozlisce* zacetek) {
-    // dopolnite ...
-
-    return -1;  // popravite
+    
+    Vozlisce* i = zacetek;
+    
+    for (int a = 0; a < 1000; a++) {
+        Vozlisce* k = i;
+        k = k->naslednje;
+        for (int b = 0; b < 1000; b++) {
+            if (k == i) {
+                return b + 1;
+            }
+            k = k->naslednje;
+        }
+        i = i->naslednje;
+    }
+    return 0;         
 }
 
 //============================================================================

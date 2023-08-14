@@ -2,7 +2,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include <math.h>
+
 int poww(int a, int b) {
+
+    if (b == 0) {
+        return 1;
+    }
+    
+    if (b == 1) {
+        return a;
+    }
+    
     int result = 1;
     for (int i = 0; i < b; i++) {
         result *= a;
@@ -70,19 +81,20 @@ int main() {
     }
     printf("\n");
     */
-    int sum = 0;
+    
+    long long sum = 0;
     int potenca = 0;
     for (int i = 7; i >= 0; i--) {
         for (int j = 7; j >= 0; j--) {
             if (mesh[i][j] == 1) {
-               int dodatek = poww(2, potenca);
-               sum += dodatek;
+               double result = pow(2.0, (double)potenca);
+               sum += (long long)result;
             }
             potenca += 1;
         }
     }
     
-    printf("%d\n", sum);
+    printf("%lld\n", sum);
     
                
     
