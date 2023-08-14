@@ -36,17 +36,20 @@ test10..test17: samodejno izdelani, n > 1
 
 Vozlisce** tabelaSeznamov(int* t, int d, int n) {
     
-    Vozlisce*** tabela = malloc (n*sizeof(Vozlisce**));
-    for (int i=0; i<n; i++){
-        tabela[i]=malloc(n*sizeof(Vozlisce*));
-    }
-
-    int count = d;
-
+    Vozlisce*** tabela = malloc(n*sizeof(Vozlisce**));
     
-
-
-
+    
+    
+    for (int i = 0; i < n; i ++) { // n vrstic
+        tabela[i] = malloc(1*sizeof(Vozlisce*));
+        for (int j = 0; j < d; j++) {
+            tabela[i][j] = malloc(1*sizeof(Vozlisce));
+        
+        
+       
+    }
+    
+    return *tabela;
     
 }
 
