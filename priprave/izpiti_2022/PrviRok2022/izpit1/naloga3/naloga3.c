@@ -30,40 +30,89 @@ test02..test08: "se nekaj dodatnih testov
 
 // Lahko dodate "se kak #include, pomo"zno funkcijo ipd.
 
-#define MAX_LEN 100
+bool nizJeVredu(char* niz, int dolzinaNiza) {
 
-void komb(char* znaki, int stZnakov, char* niz, int dolzinaNiza, int i, int j) {
+    bool velikaCrka = false;
+    bool malaCrka = false;
+    bool stevilo = false;
     
-    if (j == n) { // Nismo vec na seznamu znakov
-        return;
+    for (int i = 0; i < dolzinaNiza; i++) {
+        if ('A' <= niz[i] && niz[i] <= 'Z') {
+            velikaCrka = true;
+        }
+        if ('a' <= niz[i] && niz[i] <= 'z') {
+            malaCrka = true;
+        }
+        if ('0' <= niz[i] && niz[i] <= '9') {
+            stevilo = true;
+        }
+    } 
+    return (stevilo && malaCrka && velikaCrka);   
+}
+
+void izpis(char* niz, int dolzinaNiza) {
+
+     for (int i = 0; i < dolzinaNiza; i++) {
+        printf("%c", niz[i]);
     }
-    
-    if (i == dolzinaNiza) { // Smo napolnili niz, preverimo ce ga lahko izpisemo
+    printf("\n");
+}
+
+void komb(char* znaki, int stZnakov, char* niz, int dolzinaNiza, int i) {
+    printf("oj");
+    // Smo napolnili niz, preverimo ce ga lahko izpisemo
+    if (i == dolzinaNiza) { 
         if (nizJeVredu(niz, dolzinaNiza) == true) {
             izpis(niz, dolzinaNiza);
             return;
         }
+        free(niz);
     }
-
+    
+    // Naredimo vse permutacije
+    for (int p = 0; p < stZnakov; p++) {
+        
+        // Nov niz, ga prekopiramo
+        char* novNiz = malloc(dolzinaNiza*sizeof(char));
+        for (int l = 0; l < dolzinaNiza; l++) {
+            novNiz[l] = niz[l];
+        }
+        
+        novNiz[i] = znaki[p];
+        
+        // Niz zapolnimo z eno izmed crk in se pomaknemo naprej 
+        komb(znaki, stZnakov, novNiz, dolzinaNiza, i + 1);
+        
+        free(novNiz);
+    }
 }
 
 
-int main(){
+int main() {
 
     int n;
     scanf("%d", &n);
-    
+    printf("1");
     getchar();
-    
+    printf("2");
     char* znaki = malloc(n*sizeof(char));
-    for (int i = 0; i < n; i ++) {
+    for (int i = 0; i < n; i++) {
         znaki[i] = getchar();
     }
-    
+    printf("3");
+    getchar();
+    printf("4");
     int len;
     scanf("%d", &len);
-    
+    printf("5");
     char* niz = calloc(len, sizeof(char));
+    printf("6");
+    komb(znaki, n, niz, len, 0);
     
-    komb(znaki, n, niz, len, 0, 0);
+    free(znaki);
+    free(niz);
 }
+
+
+
+
