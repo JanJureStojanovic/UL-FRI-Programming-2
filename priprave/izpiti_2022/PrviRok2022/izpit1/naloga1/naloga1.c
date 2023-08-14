@@ -38,39 +38,39 @@ test15..test17: samodejno izdelani, splo"sni
 
 int sestEj(char* niz) {
 
-    char* temp = calloc(10,sizeof(char));
-
     int sum = 0;
-    for (int i=0; niz[i]!='\0'; i++){
-        if (niz[i]=='E' && (niz[i+1]!='0' && isdigit(niz[i+1])) && isdigit(niz[i+2]) && isdigit(niz[i+3]) && niz[i+4]=='_'){
-            temp[0]=niz[i+1];
-            temp[1]=niz[i+2];
-            temp[2]=niz[i+3];
-            temp[3]='\0';
-            int currentNumber = atoi(temp);
-            if (currentNumber>99){
-                sum+=currentNumber;
+    int st;
+
+    int len = strlen(niz);
+   
+    for (int i = 0; i < len; i++) {
+    
+        if (niz[i] == 'E') { // Potencialen zactek nasega stevila
+        
+            if ('0' < niz[i+1] && niz[i+1] <= '9') {
+                i++;
+                st = niz[i] - '0';
+                i++;
+                while('0' <= niz[i] && niz[i] <= '9') {
+                    st *= 10; // Povecamo
+                    st += niz[i] - '0'; // Pristejemo
+                    i++; // Premaknemo
+                }
+                if (niz[i] == '_') {
+                    //printf("%d\n", st);
+                    sum += st;
+                } 
             }
-
-
         }
+        st = 0;
     }
+    
     return sum;
-
-
-
-
 }
-
-//============================================================================
-
-// Vrstici z #ifndef in #endif pustite pri miru!
 
 #ifndef test
 
 int main() {
-    char* lol="543_E123_e456_E75_E900/E7.4_E825.3_E0357_E089_E_EE651_abcdE736_E842";
-    int lol2 = sestEj(lol);
     return 0;
 }
 
