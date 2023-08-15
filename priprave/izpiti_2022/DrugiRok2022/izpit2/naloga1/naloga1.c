@@ -30,23 +30,34 @@ test07..test10: samodejno izdelani, splo"sni
 
 // Lahko dodate "se kak #include, pomo"zno funkcijo ipd.
 
-int main(int argc, char** argv) {
+#include <stdio.h>
+
+int count_bits(unsigned char byte) {
+    int count = 0;
+    while (byte > 0) {
+        count += byte & 1;
+        byte >>= 1;
+    }
+    return count;
+}
+
+int main(int argc, char *argv[]) {
     
-    FILE* input = fopen(argv[1], "rb");
-    unsigned char byte;
-    int counter = 0;
-    while (fread(&byte, sizeof(unsigned char), 1, input) != 0){
-        while (byte!=0){
-            counter += byte&1;
-            byte>>=1;
-        }
+    FILE *file = fopen(argv[1], "rb");
+    if (file == NULL) {
+        perror("Error opening file");
+        return 1;
     }
 
-    printf("%d", counter);
+    int totalBits = 0;
+    unsigned char byte;
+    while (fread(&byte, 1, 1, file) == 1) {
+        totalBits += count_bits(byte);
+    }
 
+    fclose(file);
 
+    printf("%d\n", totalBits);
 
-
-
-
+    return 0;
 }

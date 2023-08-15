@@ -36,53 +36,51 @@ test*.res: dejanski izhod testnega programa (pri poganjanju z make)
 
 //============================================================================
 
-void enrichen (char** string){
-        char* new = malloc (1100*sizeof(char));
-        strcpy(new, *string);
-        sprintf(*string, "<h1>%s</h1>", new);
-}
-
-
 void vstaviH1(Vozlisce* zacetek) {
 
-    Vozlisce* current = zacetek;
-
-    Vozlisce* previous = NULL;
-
-    while (current!=NULL){
-        if (previous==NULL){ // prvi element linked lista
-            if (current->naslednje!=NULL){
-                if (current->niz[0]!='\0' && current->naslednje->niz[0]=='\0'){
-                    enrichen(&(current->niz));
-                }
-                previous=current;
-            }
-            else{
-                if (current->niz[0]!='\0'){
-                    enrichen(&(current->niz));
-                }
-                previous=current;
+    Vozlisce* i = zacetek;
+    
+    while (i != NULL) {
+        
+        if (i->niz[0] == '\0') {
+        
+            i = i->naslednje;
+        
+            if (i->niz[0] != '\0' && (i->naslednje == NULL || i->naslednje->niz[0] == '\0')) {
+                char str1[] = "<h1>";
+                char* str2 = i->niz;
+                char str3[] = "</h1>";
+                
+                int totalLength = strlen(str1) + strlen(str2) + strlen(str3) + 1; 
+                char* combined = (char*)malloc(totalLength);
+                
+                strcpy(combined, str1); // Copy the first string
+                strcat(combined, str2); // Concatenate the second string
+                strcat(combined, str3); // Concatenate the third string
+            
+                i->niz = combined;
             }
         }
-
-        if (current->naslednje!=NULL){ // ne-prvi in ne-zadnji element linked lista
-            if (previous->niz[0]=='\0' && current->niz[0]!='\0' && current->naslednje->niz[0]=='\0'){
-                enrichen(&(current->niz));
-            }
-            previous=current;
-        }
-        if (current->naslednje==NULL){ // zadnji element linked lista
-            if (previous->niz[0]=='\0' && current->niz[0]!='\0'){
-                enrichen(&(current->niz));
-            }
-            previous=current;
-        }
-
-        // previous=current;
-        current=current->naslednje;
+            
+        i = i->naslednje;
     }
-
-
+    
+    Vozlisce* j = zacetek;
+    
+    if (j->niz[0] != '\0') {
+        char str1[] = "<h1>";
+        char* str2 = j->niz;
+        char str3[] = "</h1>";
+        
+        int totalLength = strlen(str1) + strlen(str2) + strlen(str3) + 1; 
+        char* combined = (char*)malloc(totalLength);
+        
+        strcpy(combined, str1); // Copy the first string
+        strcat(combined, str2); // Concatenate the second string
+        strcat(combined, str3); // Concatenate the third string
+    
+        j->niz = combined;
+    }
 }
 
 //============================================================================

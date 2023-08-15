@@ -39,31 +39,36 @@ ref*.pgm: pri"cakovana izhodna slika
 
 int main(int argc, char** argv) {
     
-    FILE* input = fopen(argv[1], "rb");
+    // Odpremo vhodni binarni file
+    FILE* input = fopen(argv[1], "rb"); 
+    // Stevilo, ki doloca spremembo
     int prag = atoi(argv[2]);
+    // Odpremo izhodno datoteko
     FILE* output = fopen(argv[3], "wb");
-
-    char* temp = malloc(sizeof(char)*10);
-
+    
+    //****************************************
+    // Temporary char (string)
+    char* temp = malloc(sizeof(char)*2);
     fgets(temp, 10, input);
     int width, height;
     fscanf(input, "%d %d %s", &width, &height, temp);
     fgets(temp, 10, input);
-
+    //****************************************
+    
     unsigned char* binary = malloc(width*height*sizeof(unsigned char));
-
+    // Breberemo byte, ki jih bomo kasneje spreminjali
     fread(binary, sizeof(unsigned char), width*height, input);
 
     for (int i=0; i<width*height; i++){
-        if (binary[i]<prag){
-            binary[i]=0;
+        if (binary[i] < prag){
+            binary[i] = 0;
         }
         else{
             binary[i]=255;
         }
     }
 
-
+    // Napisemo vse potrebno v nov file
     fprintf(output, "P5\n");
     fprintf(output, "%d %d\n", width, height);
     fprintf(output, "255\n");
