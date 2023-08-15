@@ -60,9 +60,9 @@ void vstaviH1(Vozlisce* zacetek) {
             
                 i->niz = combined;
             }
+        } else {  
+            i = i->naslednje;
         }
-            
-        i = i->naslednje;
     }
     
     Vozlisce* j = zacetek;
