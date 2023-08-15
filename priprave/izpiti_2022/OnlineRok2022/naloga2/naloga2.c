@@ -34,7 +34,58 @@ test11..test16: samodejno izdelani, splo"sni
 
 //============================================================================
 
-Vozlisce* zlij(Vozlisce* a, Vozlisce* b) { // lepa resitev za 16/16 testnih , grsa ki je passala 12.5/16 je bila da sem naredil seznam vozlisc ampak tale je lepsa pa hitrejsa
+Vozlisce* zlij(Vozlisce* a, Vozlisce* b) { 
+
+    Vozlisce* i;
+    Vozlisce* j;
+    
+    Vozlisce* zacetek;
+    
+    if (a->podatek < b->podatek) {
+        zacetek = a;
+        i = a;
+        j = b;
+    } else {
+        zacetek = b;
+        i = b;
+        j = a;
+    }
+    
+    while (i != NULL) {
+    
+        if (i->naslednje == NULL) {
+            i->naslednje = j;
+            break;
+        }
+        
+        if (i->naslednje != NULL) {
+            if (i->naslednje->podatek < j->podatek) {
+                i = i->naslednje;
+            } else {
+                Vozlisce* temp = i->naslednje;
+                i->naslednje = j;
+                i = i->naslednje;
+                j = temp;
+            }
+        }    
+    }
+    
+    return zacetek;
+}
+
+//============================================================================
+
+// Vrstici z #ifndef in #endif pustite pri miru!
+
+#ifndef test
+
+int main() {
+    return 0;
+}
+
+#endif
+
+/*
 
 Vozlisce new;
 Vozlisce* newP = &new;
@@ -69,18 +120,5 @@ Vozlisce* newP = &new;
     return newP->naslednje;
 
 
+*/
 
-
-}
-
-//============================================================================
-
-// Vrstici z #ifndef in #endif pustite pri miru!
-
-#ifndef test
-
-int main() {
-    return 0;
-}
-
-#endif
