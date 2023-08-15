@@ -35,22 +35,17 @@ test06..test10: samodejno izdelani, splo"sni
 //============================================================================
 
 void vstaviPredpono(char* predpona, Oseba** osebe, int stOseb) {
-    
-    for (int i=0; i<stOseb; i++){
-        char* temp = malloc (33*sizeof(char));
-        strcpy(temp, osebe[i]->telefon);
-        strcpy(osebe[i]->telefon, predpona);
-        strcat(osebe[i]->telefon, temp);
+
+    for (int i = 0; i < stOseb; i++) {
+        int len = strlen(predpona) + strlen(osebe[i]->telefon);
+        char novTel[len];
+        
+        strcpy(novTel, predpona);
+        strcat(novTel, osebe[i]->telefon);
+        
+        strcpy(osebe[i]->telefon, novTel);
     }
-
-
-
-
-
-
-
-
-
+    
 }
 
 //============================================================================
