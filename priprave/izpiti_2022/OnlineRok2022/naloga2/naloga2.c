@@ -85,40 +85,4 @@ int main() {
 
 #endif
 
-/*
-
-Vozlisce new;
-Vozlisce* newP = &new;
-
-    while (a!=NULL || b!=NULL){
-        if (a==NULL){
-            newP->naslednje=b;
-            b=b->naslednje;
-            newP=newP->naslednje;
-            newP->naslednje=NULL;
-        }
-        else if (b==NULL){
-            newP->naslednje=a;
-            a=a->naslednje;
-            newP=newP->naslednje;
-            newP->naslednje=NULL;
-        }
-        else if (a->podatek < b->podatek){
-            newP->naslednje=a;
-            a=a->naslednje;
-            newP=newP->naslednje;
-            newP->naslednje=NULL;
-        }
-        else if (b->podatek < a->podatek){
-            newP->naslednje=b;
-            b=b->naslednje;
-            newP=newP->naslednje;
-            newP->naslednje=NULL;
-        }
-    }
-    newP=&new;
-    return newP->naslednje;
-
-
-*/
 
