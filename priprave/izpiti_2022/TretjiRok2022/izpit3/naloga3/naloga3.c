@@ -44,18 +44,16 @@ Vozlisce* drevo(int n, int* podatki){
 
     // Alokacija in inicializacija korena
     Vozlisce* koren = malloc(sizeof(Vozlisce));
-    if (!koren){
-        return NULL; // neuspešna alokacija
-    }
-
+   
+    // Nastavimo podatek
     koren->podatek = podatki[0];
 
     // Izračun za velikost poddrevesa
     int velikost_poddrevesa = (1 << (n - 1)) - 1;
 
     // Rekurzivno ustvari levo in desno poddrevo
-    koren->levo = drevo(n - 1, podatki + 1);
-    koren->desno = drevo(n - 1, podatki + 1 + velikost_poddrevesa);
+    koren->levo = drevo(n - 1, podatki + 1); // Namesto 0 -> 1
+    koren->desno = drevo(n - 1, podatki + 1 + velikost_poddrevesa); // Namesto 0 -> 8 = (0 + 1 + 7)
 
     return koren;
 }
@@ -75,3 +73,55 @@ int main() {
 }
 
 #endif
+
+
+
+
+
+
+
+/*
+
+Vozlisce* drevo(int n, int* podatki){
+    // Zaustavitveni pogoj rekurzije
+    if (n <= 0){
+        return NULL;
+    }
+
+    // Alokacija in inicializacija korena
+    Vozlisce* koren = malloc(sizeof(Vozlisce));
+    if (!koren){
+        return NULL; // neuspešna alokacija
+    }
+
+    koren->podatek = podatki[0];
+
+    // Izračun za velikost poddrevesa
+    int velikost_poddrevesa = (1 << (n - 1)) - 1;
+
+    // Rekurzivno ustvari levo in desno poddrevo
+    koren->levo = drevo(n - 1, podatki + 1);
+    koren->desno = drevo(n - 1, podatki + 1 + velikost_poddrevesa);
+
+    return koren;
+}
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
