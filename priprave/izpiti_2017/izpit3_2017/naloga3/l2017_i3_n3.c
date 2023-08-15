@@ -1,5 +1,37 @@
-/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
-Ne moram brez testnih primerov? Need to look into it
+int main() {
 
-*/
+
+
+
+
+
+
+
+
+
+
+    return 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -3,95 +3,109 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool samiX(char* niz) {
-    for(int i = 0; i < strlen(niz); i++) {
-        if (niz[i] != 'x') {
-            return false;
+bool test(char* niz) {
+    
+    int len = strlen(niz);
+    
+    if (len%2 == 1) {
+        return false;
+    }
+    
+    for (int i = 0; i < len; i++) {
+        for (int j = 0; j < len - 1; j++) {
+        
+            if (niz[j] == '(' && niz[j+1] == ')') {
+                
+                char* noviNiz = calloc(1000, sizeof(char));
+                
+                int ix = 0;
+                
+                for (int k = 0; k <= len; k++) {
+                    if (k == j || k == j + 1) {
+                        continue;
+                    }
+                    
+                    noviNiz[ix] = niz[k];
+                    ix++;
+                }
+                //printf("%s %s\n", niz, noviNiz);
+                strcpy(niz, noviNiz);  
+            }
+            
+            if (niz[j] == '[' && niz[j+1] == ']') {
+                
+                char* noviNiz = calloc(1000, sizeof(char));
+                
+                int ix = 0;
+                
+                for (int k = 0; k <= len; k++) {
+                    if (k == j || k == j + 1) {
+                        continue;
+                    }
+                    
+                    noviNiz[ix] = niz[k];
+                    ix++;
+                }
+                //printf("%s %s\n", niz, noviNiz);
+                strcpy(niz, noviNiz);  
+            }
+            
+            if (niz[j] == '{' && niz[j+1] == '}') {
+                
+                char* noviNiz = calloc(1000, sizeof(char));
+                
+                int ix = 0;
+                
+                for (int k = 0; k <= len; k++) {
+                    if (k == j || k == j + 1) {
+                        continue;
+                    }
+                    
+                    noviNiz[ix] = niz[k];
+                    ix++;
+                }
+                //printf("%s %s\n", niz, noviNiz);
+                strcpy(niz, noviNiz);  
+            }
         }
     }
-    return true;
+    
+    if (strlen(niz) == 0) {
+        return true;
+    }
+    return false;
+
 }
+
 
 int main() {
 
     int n;
-    scanf("%d\n", &n);
+    scanf("%d", &n);
     
-    char** nizi = calloc(n, sizeof(char*));
+    char** nizi = malloc(n*sizeof(char*));
     
     for (int i = 0; i < n; i++) {
-        nizi[i] = calloc(1000, sizeof(char));
+        nizi[i] = malloc(1001*sizeof(char));
     }
     
-    // Sprejememo vse besede
     for (int i = 0; i < n; i++) {
-        char x = getchar();
-        int j = 0; 
-        while(x != '\n') {
-            nizi[i][j] = x;
-            j++;
-            x = getchar();
+        scanf("%s", nizi[i]);
+    }
+    
+    int num = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (test(nizi[i]) == true) {
+            num++;
         }
     }
     
-    int stDobrih = 0;
+    printf("%d\n", num);
     
-    // Pregledamo vse nize
     for (int i = 0; i < n; i++) {
-        
-        // Izberemo i-ti niz
-        char* niz = nizi[i];
-            
-        for (int j = 0; j < strlen(niz); j++) {
-            // Dve zaporedni damo v x
-            if (niz[j] == '(' && niz[j+1] == ')') {
-                niz[j] = 'x';
-                niz[j+1] = 'x';
-                continue;
-            }
-            if (niz[j] == '[' && niz[j+1] == ']') {
-                niz[j] = 'x';
-                niz[j+1] = 'x';
-                continue;
-            }
-            if (niz[j] == '{' && niz[j+1] == '}') {
-                niz[j] = 'x';
-                niz[j+1] = 'x';
-                continue;
-            }
-        }
-        
-        for (int o = 0; o < strlen(niz); o++) {
-            for (int j = 0; j < strlen(niz); j++) {
-                if (niz[j] == '(' && niz[j+1] == 'x') {
-                    for (int k = 3; k < strlen(niz); k += 2) {
-                        if (niz[j + k] == ')') {
-                            niz[j] = 'x';
-                            niz[j + k] = 'x';
-                        }
-                    }    
-                }
-                if (niz[j] == '[' && niz[j+1] == 'x') {
-                    for (int k = 3; k < strlen(niz); k += 2) {
-                        if (niz[j + k] == ']') {
-                            niz[j] = 'x';
-                            niz[j + k] = 'x';
-                        }
-                    }
-                }
-                if (niz[j] == '{' && niz[j+1] == 'x') {
-                    for (int k = 3; k < strlen(niz); k += 2) {
-                        if (niz[j + k] == '}') {
-                            niz[j] = 'x';
-                            niz[j + k] = 'x';
-                        }
-                    }
-                }
-            }
-        }
-        if (samiX(niz) == true) {
-            stDobrih++;
-         }
+        free(nizi[i]);
     }
-    printf("%d\n", stDobrih);
+    free(nizi);
+    
 }
