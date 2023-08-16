@@ -91,22 +91,18 @@ void komb(char* znaki, int stZnakov, char* niz, int dolzinaNiza, int i) {
 int main() {
 
     int n;
-    scanf("%d", &n);
-    printf("1");
-    getchar();
-    printf("2");
+    scanf("%d ", &n);
+
     char* znaki = malloc(n*sizeof(char));
     for (int i = 0; i < n; i++) {
         znaki[i] = getchar();
     }
-    printf("3");
-    getchar();
-    printf("4");
+
     int len;
-    scanf("%d", &len);
-    printf("5");
+    scanf(" %d", &len);
+    
     char* niz = calloc(len, sizeof(char));
-    printf("6");
+
     komb(znaki, n, niz, len, 0);
     
     free(znaki);
