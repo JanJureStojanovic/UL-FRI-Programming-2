@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/*
+
 int rek(int n, int trenutnaVisina) {
 
     if (trenutnaVisina > n) { // Smo previsoko, da bi se pravocasno vrnili
@@ -23,12 +25,31 @@ int rek(int n, int trenutnaVisina) {
 
 }
 
+*/
+
+int rekk(int n) {
+    
+    if (n == 0) {
+        return 1;
+    }
+    
+    int sum = 0;
+    
+    for (int i = 0; i < n; i++) {
+        sum += rekk(i)*rekk(n-1-i);
+    }
+    
+    return sum;
+        
+
+}
+
 int main() {
 
     int n;
     scanf("%d", &n);
     
-    int odg = rek(n, 0);
+    int odg = rekk(n/2);
     
     printf("%d\n", odg);
 
