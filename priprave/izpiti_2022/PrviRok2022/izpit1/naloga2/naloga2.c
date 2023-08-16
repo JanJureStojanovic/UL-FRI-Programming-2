@@ -43,15 +43,23 @@ Vozlisce** tabelaSeznamov(int* t, int d, int n) {
         tabela[i] = temp;
         temp->vTabelo = t + (1 << i) - 1;
         temp->naslednje = NULL;
+        
+        Vozlisce* k = temp;
+        
+        for (int j = (1 << i)-1; j < d; j += (1 << i)) {
+            Vozlisce* novo = malloc(1*sizeof(Vozlisce));
+            novo->vTabelo = t + j;
+            novo->naslednje = NULL; 
+            k->naslednje = novo;
+            
+            k = novo;
+        }       
     }
     
     for (int i = 0; i < n; i ++) { 
-        Vozlisce* temp = malloc(1*sizeof(Vozlisce));
-        tabela[i] = temp;
-        temp->vTabelo = t + (1 << i) - 1;
-        temp->naslednje = NULL;
+        tabela[i] = tabela[i]->naslednje;
     }
-        
+    
     return tabela;
     
 }
