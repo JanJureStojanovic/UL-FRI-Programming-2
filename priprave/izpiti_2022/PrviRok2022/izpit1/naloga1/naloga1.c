@@ -57,7 +57,6 @@ int sestEj(char* niz) {
                     i++; // Premaknemo
                 }
                 if (niz[i] == '_') {
-                    //printf("%d\n", st);
                     sum += st;
                 } 
             }
