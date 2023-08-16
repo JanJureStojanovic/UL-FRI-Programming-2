@@ -29,33 +29,81 @@ test06..test15: primeri z n > 12
 
 // Lahko dodate "se kak #include, pomo"zno funkcijo ipd.
 
+int** narediVzorec(int** trenutnoPolje, int i, int tv, int n) {
+
+    if (i == n) {
+        return trenutnoPolje;
+    }
+    
+    if (n < 1) {
+        return NULL;
+    }
+    
+    // Dolocimo sirino in visino polja
+    int x = tv*2;
+    
+    // Alociramo prostor
+    int** novaTabela = calloc(x, sizeof(int*));
+    for (int j = 0; j < x; j++) {
+        novaTabela[j] = calloc(x, sizeof(int));
+    }
+    
+    for (int k = 0; k < tv; k++) {
+        for (int l = 0; l < tv; l++) {
+            novaTabela[k][l] =  trenutnoPolje[k%tv][l%tv];
+        }
+    }
+    for (int k = 0; k < tv; k++) {
+        for (int l = tv; l < x; l++) {
+            novaTabela[k][l] =  trenutnoPolje[k%tv][l%tv];
+        }
+    }
+    for (int k = tv; k < x; k++) {
+        for (int l = tv; l < x; l++) {
+            novaTabela[k][l] = trenutnoPolje[k%tv][l%tv];
+        }
+    }
+    
+    int** ret = narediVzorec(novaTabela, i + 1, x, n);
+    
+    return ret;
+}
+
 int main() {
     
     int n, a, b, c, d; // Po visini gremo od a -> c, po sirini pa b -> d ... pravokotnik
     scanf("%d %d %d %d %d", &n, &a, &b, &c, &d);
     
-    int len = 1 << n;
+    if (n == 0) {
+        printf("1\n");
+        printf("*\n");
+    } else {
     
-    int** vzorec = calloc(len, sizeof(int*));
-    for (int i = 0; i < len; i++) {
-        vzorec[i] = calloc(len, sizeof(int));
-    }
-    
-    for (int i = 0; i < len; i += 2) {
+        // Naredimo tabelo za n == 1;
+        int** trenutnoPolje = calloc(2, sizeof(int*));
+        for (int j = 0; j < 2; j++) {
+            trenutnoPolje[j] = calloc(2, sizeof(int));
+        }
+        trenutnoPolje[0][0] = 1;
+        trenutnoPolje[0][1] = 1;
+        trenutnoPolje[1][1] = 1;
         
-        for (int j = i; j < len; j += 2) {
-            vzorec[i][j] = 1;   
-            vzorec[i][j + 1] = 1;
-            vzorec[i + 1][j + 1] = 1; 
-        }
+        int** vzorec = narediVzorec(trenutnoPolje, 1, 2, n);
+        
+        printf("%d\n", (int)pow(3, n));
+        
+        for (int i = a; i < a + c; i++) {
+            for (int j = b; j < b + d; j++) {
+                if (vzorec[i][j] == 1) {
+                    printf("*");
+                } else {
+                    printf("-");
+                }
+                
+            }
+            printf("\n");
+        }    
     }
-    
-    for (int i = 0; i < len; i++) {
-        for (int j = 0; j < len; j++) {
-            printf("%d ", vzorec[i][j]); 
-        }
-        printf("\n");  
-    }    
 }
 
 
