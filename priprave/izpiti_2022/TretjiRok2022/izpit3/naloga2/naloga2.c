@@ -38,9 +38,28 @@ test*.res: dejanski izhod testnega programa (pri poganjanju z make)
 
 void vstaviH1(Vozlisce* zacetek) {
 
-    Vozlisce* i = zacetek;
+    if (zacetek == NULL) {
+        return;
+    }
+
+    if (zacetek->niz[0] != '\0' && (zacetek->naslednje == NULL || zacetek->naslednje->niz[0] == '\0')) {
+        char str1[] = "<h1>";
+        char* str2 = zacetek->niz;
+        char str3[] = "</h1>";
+        
+        int totalLength = strlen(str1) + strlen(str2) + strlen(str3) + 1; 
+        char* combined = (char*)malloc(totalLength*sizeof(char));
+        
+        strcpy(combined, str1); // Copy the first string
+        strcat(combined, str2); // Concatenate the second string
+        strcat(combined, str3); // Concatenate the third string
     
-    while (i != NULL) {
+        zacetek->niz = combined;
+    }
+    
+    Vozlisce* i = zacetek;
+     
+    while (i->naslednje != NULL) {
         
         if (i->niz[0] == '\0') {
         
@@ -52,34 +71,17 @@ void vstaviH1(Vozlisce* zacetek) {
                 char str3[] = "</h1>";
                 
                 int totalLength = strlen(str1) + strlen(str2) + strlen(str3) + 1; 
-                char* combined = (char*)malloc(totalLength);
+                char* combined = (char*)malloc(totalLength*sizeof(char));
                 
                 strcpy(combined, str1); // Copy the first string
                 strcat(combined, str2); // Concatenate the second string
                 strcat(combined, str3); // Concatenate the third string
             
                 i->niz = combined;
-            }
-        } else {  
+            } 
+        } else {
             i = i->naslednje;
         }
-    }
-    
-    Vozlisce* j = zacetek;
-    
-    if (j->niz[0] != '\0') {
-        char str1[] = "<h1>";
-        char* str2 = j->niz;
-        char str3[] = "</h1>";
-        
-        int totalLength = strlen(str1) + strlen(str2) + strlen(str3) + 1; 
-        char* combined = (char*)malloc(totalLength);
-        
-        strcpy(combined, str1); // Copy the first string
-        strcat(combined, str2); // Concatenate the second string
-        strcat(combined, str3); // Concatenate the third string
-    
-        j->niz = combined;
     }
 }
 
