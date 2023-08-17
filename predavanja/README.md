@@ -185,7 +185,8 @@ Recursion is a programming technique in which a function calls itself in order t
 ### 3.1 Base Case: 
 A condition that determines when the recursion should stop. It's the simplest case that can be solved directly without further recursive calls.
 
-### 3.2 Recursive Case: The part of the function that calls itself with modified arguments, moving the problem towards the base case.
+### 3.2 Recursive Case: 
+The part of the function that calls itself with modified arguments, moving the problem towards the base case.
 
 Recursion is often used to solve problems that can be broken down into smaller, similar subproblems. It's important to make sure that each recursive call brings you closer to the base case; otherwise, the recursion won't terminate.
 
