@@ -574,6 +574,170 @@ int main() {
 }
 ```
 
+## 7. Text files
+
+### 7.1 Functions for Reading Files:
+1. fopen: Opens a file.
+
+```c
+FILE *fopen(const char *filename, const char *mode);
+```
+
+2. fgetc: Reads a character from a file.
+
+```c
+int fgetc(FILE *stream);
+```
+
+3. fgets: Reads a line from a file.
+
+```c
+char *fgets(char *str, int n, FILE *stream);
+```
+
+4. fread: Reads data from a file.
+
+```c
+size_t fread(void *ptr, size_t size, size_t count, FILE *stream);
+```
+
+5. Example:
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("input.txt", "r");  // Open the file for reading
+
+    if (file != NULL) {
+        char line[100];
+        while (fgets(line, sizeof(line), file) != NULL) {
+            printf("Read from file: %s", line);
+        }
+        
+        fclose(file);  // Close the file
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+### 7.2 Functions for Writing Files:
+1. fopen: Opens a file (also used for writing).
+
+```c
+FILE *fopen(const char *filename, const char *mode);
+```
+
+2. fprintf: Writes formatted data to a file.
+
+```c
+int fprintf(FILE *stream, const char *format, ...);
+```
+
+3. fputc: Writes a character to a file.
+
+```c
+int fputc(int c, FILE *stream);
+```
+
+4. fputs: Writes a string to a file.
+
+```c
+int fputs(const char *str, FILE *stream);
+```
+
+5. fwrite: Writes data to a file.
+
+```c
+ size_t fwrite(const void *ptr, size_t size, size_t count, FILE *stream);
+```
+
+6. Example:
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("output.txt", "w");  // Open the file for writing
+
+    if (file != NULL) {
+        fprintf(file, "Hello, world!\n");
+        fprintf(file, "This is a line written to the file.\n");
+        
+        fclose(file);  // Close the file
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+### 7.3 Closing Files:
+1. fclose: Closes a file.
+
+```c
+int fclose(FILE *stream);
+```
+
+### 7.4 EOF:
+EOF stands for "End of File." It's a symbolic constant defined in the C standard library that represents the end of a file when reading from it. When you reach the end of a file while reading, functions like fgetc and fgets return the special value EOF to indicate that no more characters can be read.
+
+Example: In this example, the while loop reads characters from the file using fgetc until the end of the file is reached, as indicated by EOF.
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("data.txt", "r");
+
+    if (file != NULL) {
+        int ch;
+        while ((ch = fgetc(file)) != EOF) {
+            printf("%c", ch);
+        }
+
+        fclose(file);
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+### 7.5 Reading Specific Number of Characters:
+If you want to read a specific number of characters from a file without seeking, you can use the fread function:
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("data.txt", "r");
+
+    if (file != NULL) {
+        char buffer[5];  // Create a buffer to hold the characters
+        
+        size_t bytesRead = fread(buffer, sizeof(char), 5, file);  // Read 5 characters
+        if (bytesRead > 0) {
+            printf("Read %zu characters: %s\n", bytesRead, buffer);
+        } else {
+            printf("Read failed.\n");
+        }
+
+        fclose(file);
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+In this example, fread reads 5 characters from the file into the buffer array and prints the read characters. The sizeof(char) is used to indicate the size of each element to read (which is 1 byte for characters).
 
 
 
