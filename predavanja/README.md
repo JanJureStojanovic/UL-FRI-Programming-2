@@ -1,8 +1,8 @@
-#Programming 2 lectures [2022/23]
+# Programming 2 lectures [2022/23]
 
-##Control constructs
+## Control constructs
 
-###Writing, compiling and running a C program
+### Writing, compiling and running a C program
 Running and compiling a C program involves several steps that transform your human-readable source code into machine-executable code. Here's a breakdown of the process:
 
 1. Writing the Source Code:
@@ -47,7 +47,7 @@ Compilers typically process the source code in a top-to-bottom manner, starting 
 Throughout these steps, the compiler and other tools ensure that your code is correct and can be executed by the target machine's architecture.
 
 
-###1. Conditional statements
+### 1. Conditional statements
 Conditional statements are used to execute different blocks of code based on whether a condition is true or false. In C, the main conditional statement is the if statement. Here's the basic syntax:
 
 ```c
@@ -70,7 +70,7 @@ if (condition1) {
 }
 ```
 
-###2. Loops:
+### 2. Loops:
 Loops are used to repeat a block of code multiple times. There are three types of loops in C: for, while, and do-while.
 
 for loop: Used when you know the number of iterations in advance.
@@ -97,7 +97,7 @@ do {
 } while (condition);
 ```
     
-###3. Branching:
+### 3. Branching:
 Branching constructs allow you to change the flow of execution based on specific cases. In C, you can achieve branching using the switch statement.
 
 ```c
@@ -116,7 +116,7 @@ switch (expression) {
 
 Remember that in each control construct, the curly braces {} are used to define the scope of the code that should be executed as a result of the condition being met.
 
-##Functions
+## Functions
 A function is a self-contained block of code that performs a specific task. Functions in C are essential for modular and organized programming. They allow you to break down your code into smaller, manageable pieces that can be reused and tested independently.
 Here's how you declare and define a function in C:
 
@@ -128,14 +128,14 @@ return_type function_name(parameters) {
 }
 ```
 
-- return_type: The data type of the value that the function will return. It can be int, float, char, void (if the function doesn't return a value), or other data types.
-- function_name: The name you choose for your function.
-- parameters: Any values that the function requires to perform its task. If the function doesn't need any parameters, you can use an empty set of parentheses ().
-- return_value: The value that the function returns to the caller. If the function's return type is void, you don't need a return statement.
+ - return_type: The data type of the value that the function will return. It can be int, float, char, void (if the function doesn't return a value), or other data types.
+ - function_name: The name you choose for your function.
+ - parameters: Any values that the function requires to perform its task. If the function doesn't need any parameters, you can use an empty set of parentheses ().
+ - return_value: The value that the function returns to the caller. If the function's return type is void, you don't need a return statement.
 
 1. Function Declaration and Definition:
-- Declaration: Tells the compiler about the function's name, return type, and parameters. It doesn't contain the actual code of the function. Declarations are usually placed in header files.
-- Definition: Provides the actual implementation of the function, including the code that performs the task.
+ - Declaration: Tells the compiler about the function's name, return type, and parameters. It doesn't contain the actual code of the function. Declarations are usually placed in header files.
+ - Definition: Provides the actual implementation of the function, including the code that performs the task.
 
 2. Calling a Function:
 To use a function, you call it by its name and pass the required arguments:
@@ -173,10 +173,10 @@ int calculateSum(int a, int b) {
 ```
 
 4. Benefits of Functions:
-Modularity: Functions help break down complex tasks into manageable parts.
-Reusability: Once a function is defined, it can be reused throughout your program.
-Readability: Well-named functions improve code readability and organization.
-Testing: Isolating functionality in functions makes testing and debugging easier.
+ - Modularity: Functions help break down complex tasks into manageable parts.
+ - Reusability: Once a function is defined, it can be reused throughout your program.
+ - Readability: Well-named functions improve code readability and organization.
+ - Testing: Isolating functionality in functions makes testing and debugging easier.
 
 
 
