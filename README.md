@@ -14,11 +14,11 @@ This repository serves as a comprehensive collection of code and projects relate
 ```
 
 - `home_work`:
-    Contains this years home work assignments that I rarely did
+    This years home work assignments
 - `lab_exercices`:
-    Contains this years laboratoy exercices for each week
+    Contains this years laboratoy exercices for each week of the semester
 - `lectures`:
-    Contains a summary in a README.md file of everything we learned
+    Holds a summary of everything we learned in a README.md file 
 - `revision`:
     Solved old exams and midterms
 
