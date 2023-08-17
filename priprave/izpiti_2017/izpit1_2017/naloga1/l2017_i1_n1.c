@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 int main() {
     
     // Prostor za niz
-    char* niz = calloc(100000, sizeof(char));
+    char* niz = calloc(100001, sizeof(char));
     
     int i = 0;
     char x = getchar();
@@ -24,10 +25,10 @@ int main() {
         pripisi = true;
         st = 0;
         
-        if(j == 0 && ('0' <= niz[j] && niz[j] <= '9')) {
+        if(j == 0 && ('0' < niz[j] && niz[j] <= '9')) {
             st = niz[j] - '0';
             j++;
-            while((niz[j] != ' ' || niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) { // Prisli smo do presledka
+            while((niz[j] != ' ' && niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) {
                 st *= 10;
                 st += niz[j] - '0';
                 j++;
@@ -36,19 +37,21 @@ int main() {
             continue;
         } 
         
-        if (niz[j - 1] == ' ' && ('0' <= niz[j] && niz[j] <= '9')) {
+        if (niz[j - 1] == ' ' && ('0' < niz[j] && niz[j] <= '9')) {
             st = niz[j] - '0';
             j++;
-            while((niz[j] != ' ' || niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) { // Prisli smo do presledka
+            while((niz[j] != ' ' && niz[j] != '\n') && ('0' <= niz[j] && niz[j] <= '9')) {
                 st *= 10;
                 st += niz[j] - '0';
                 j++;
-            }   
+            }  
             finalSum += st;
             continue;
         }     
     }
     printf("%d\n", finalSum);
+    free(niz);
+    return 0;
 }
 
 
