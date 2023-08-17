@@ -5,7 +5,7 @@ This repository serves as a comprehensive collection of code and projects relate
 ```
 .
 ├── home_work
-├── lab_exercices
+├── lab_exercises
 ├── lectures
 ├── revision
 ├── README.md
@@ -14,7 +14,7 @@ This repository serves as a comprehensive collection of code and projects relate
 
 - `home_work`:
     This years home work assignments
-- `lab_exercices`:
+- `lab_exercises`:
     Contains this years laboratoy exercices for each week of the semester
 - `lectures`:
     Holds a summary of everything we learned in a README.md file 
