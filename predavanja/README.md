@@ -739,7 +739,100 @@ int main() {
 
 In this example, fread reads 5 characters from the file into the buffer array and prints the read characters. The sizeof(char) is used to indicate the size of each element to read (which is 1 byte for characters).
 
+## 8. Binary files
+Binary files are used to store data in its raw binary form, without any human-readable formatting. Reading and writing binary files in C requires the use of functions that work with binary data instead of text data.
 
+### 8.1 Writing to Binary File:
+To write data to a binary file, you can use the fwrite function. This function allows you to write a block of data directly to the file without any formatting.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int data[] = {10, 20, 30, 40, 50};
+    
+    FILE *file = fopen("data.bin", "wb");  // Open for writing in binary mode
+
+    if (file != NULL) {
+        fwrite(data, sizeof(int), sizeof(data) / sizeof(int), file);  // Write data to file
+        fclose(file);  // Close the file
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+### 8.2 Reading from Binary File:
+To read data from a binary file, you can use the fread function. This function allows you to read a block of data from the file.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int data[5];
+    
+    FILE *file = fopen("data.bin", "rb");  // Open for reading in binary mode
+
+    if (file != NULL) {
+        fread(data, sizeof(int), sizeof(data) / sizeof(int), file);  // Read data from file
+        fclose(file);  // Close the file
+
+        for (int i = 0; i < 5; i++) {
+            printf("%d ", data[i]);
+        }
+        printf("\n");
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+### 8.3 Using unsigned char:
+When working with binary files where you're dealing with individual bytes of data or ASCII characters, using unsigned char is a common practice. The reason for this is that unsigned char can directly represent values in the range of 0 to 255, which aligns well with the byte-sized data commonly found in binary files.
+
+Here are a few reasons why unsigned char is often used:
+1. Byte Representation: Binary files are composed of bytes, and an unsigned char is a one-byte data type, making it a natural choice for representing individual bytes of data.
+2. No Sign Extension: When working with bytes, you typically don't care about the sign bit. Using unsigned char ensures that values from 0 to 127 represent the same values as their signed counterparts, and values from 128 to 255 represent positive values.
+3. ASCII Representation: For ASCII characters, using unsigned char allows you to directly map the ASCII codes (0 to 127) to the corresponding characters. For example, 'A' corresponds to ASCII code 65, which can be stored in an unsigned char.
+
+Here's an example of reading and writing individual bytes using unsigned char:
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("binary_data.bin", "wb");
+
+    if (file != NULL) {
+        unsigned char byte = 0x55;  // Example byte value
+        fwrite(&byte, sizeof(unsigned char), 1, file);
+
+        fclose(file);
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    file = fopen("binary_data.bin", "rb");
+
+    if (file != NULL) {
+        unsigned char readByte;
+        fread(&readByte, sizeof(unsigned char), 1, file);
+        printf("Read byte: 0x%x\n", readByte);
+
+        fclose(file);
+    } else {
+        printf("File could not be opened.\n");
+    }
+
+    return 0;
+}
+```
+
+In this example, we're writing and then reading an individual byte using unsigned char. Remember to use the & operator when passing the address of the unsigned char variable to fwrite and fread.
 
 
 
