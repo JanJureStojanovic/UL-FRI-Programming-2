@@ -1,8 +1,8 @@
 # Programming 2 lectures [2022/23]
 
-## Control constructs
+## 1. Control constructs
 
-### Writing, compiling and running a C program
+### 1.1 Writing, compiling and running a C program
 Running and compiling a C program involves several steps that transform your human-readable source code into machine-executable code. Here's a breakdown of the process:
 
 1. Writing the Source Code:
@@ -47,7 +47,7 @@ Compilers typically process the source code in a top-to-bottom manner, starting 
 Throughout these steps, the compiler and other tools ensure that your code is correct and can be executed by the target machine's architecture.
 
 
-### 1. Conditional statements
+### 1.2 Conditional statements
 Conditional statements are used to execute different blocks of code based on whether a condition is true or false. In C, the main conditional statement is the if statement. Here's the basic syntax:
 
 ```c
@@ -70,7 +70,7 @@ if (condition1) {
 }
 ```
 
-### 2. Loops:
+### 1.3 Loops:
 Loops are used to repeat a block of code multiple times. There are three types of loops in C: for, while, and do-while.
 
 for loop: Used when you know the number of iterations in advance.
@@ -97,7 +97,7 @@ do {
 } while (condition);
 ```
     
-### 3. Branching:
+### 1.4 Branching:
 Branching constructs allow you to change the flow of execution based on specific cases. In C, you can achieve branching using the switch statement.
 
 ```c
@@ -116,7 +116,7 @@ switch (expression) {
 
 Remember that in each control construct, the curly braces {} are used to define the scope of the code that should be executed as a result of the condition being met.
 
-## Functions
+## 2. Functions
 A function is a self-contained block of code that performs a specific task. Functions in C are essential for modular and organized programming. They allow you to break down your code into smaller, manageable pieces that can be reused and tested independently.
 Here's how you declare and define a function in C:
 
@@ -178,6 +178,51 @@ int calculateSum(int a, int b) {
  - Readability: Well-named functions improve code readability and organization.
  - Testing: Isolating functionality in functions makes testing and debugging easier.
 
+## 3. Recursion:
 
+Recursion is a programming technique in which a function calls itself in order to solve a problem. Recursive functions have two main components:
+
+### 3.1 Base Case: 
+A condition that determines when the recursion should stop. It's the simplest case that can be solved directly without further recursive calls.
+
+### 3.2 Recursive Case: The part of the function that calls itself with modified arguments, moving the problem towards the base case.
+
+Recursion is often used to solve problems that can be broken down into smaller, similar subproblems. It's important to make sure that each recursive call brings you closer to the base case; otherwise, the recursion won't terminate.
+
+Example: Factorial Using Recursion: Calculating the factorial of a non-negative integer n can be defined recursively as follows:
+
+```c
+n! = n * (n-1)!
+```
+
+Here's how you could implement a recursive factorial function in C:
+
+```c
+#include <stdio.h>
+
+int factorial(int n) {
+    // Base case
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        // Recursive case
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    int num = 5;
+    printf("Factorial of %d is %d\n", num, factorial(num));
+
+    return 0;
+}
+```
+
+In this example, the factorial function calculates the factorial of a given number n using recursion. The base case is when n is 0 or 1, in which case the function returns 1. Otherwise, the function makes a recursive call by calculating (n - 1)! and multiplying it by n.
+
+### 3.3 Recursion vs. Iteration:
+Recursion is a powerful technique, but it can also lead to increased memory usage and potential stack overflow if not implemented carefully. In many cases, problems that can be solved recursively can also be solved using iterative approaches (loops). Both techniques have their strengths, and the choice depends on the problem and your coding style.
+
+When using recursion, it's important to ensure that the base case is reached and that each recursive call makes progress toward the base case. Understanding the call stack and the order of function calls is crucial for effectively implementing recursive algorithms.
 
 
