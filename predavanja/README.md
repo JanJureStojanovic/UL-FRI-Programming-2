@@ -115,9 +115,102 @@ switch (expression) {
 
 Remember that in each control construct, the curly braces {} are used to define the scope of the code that should be executed as a result of the condition being met.
 
+## 2. Arrays
 
+### 2.1 Arrays:
+An array is a collection of elements of the same data type, stored in contiguous memory locations. It allows you to store and access multiple values using a single variable name. Here's how you declare and use an array:
 
-## 2. Functions
+```c
+// Declaration: data_type array_name[array_size];
+int numbers[5];  // Declares an integer array of size 5
+
+// Initialization
+numbers[0] = 10;
+numbers[1] = 20;
+// ... and so on
+
+// Accessing array elements
+int value = numbers[2];  // Accesses the third element (index 2)
+```
+
+Arrays in C are zero-indexed, meaning the first element is accessed with index 0, the second with index 1, and so on. Be cautious not to access elements outside the defined bounds of the array to avoid undefined behavior.
+
+### 2.2 Pointers
+Pointers are a powerful tool in C programming. They allow you to work with memory addresses and create more dynamic and efficient programs. Pointers play a crucial role in areas like dynamic memory allocation, passing data by reference, and creating data structures like linked lists.
+
+#### 2.2.1 What is a Pointer?
+A pointer is a variable that stores the memory address of another variable. Instead of storing the actual data, a pointer stores the location in memory where the data is stored.
+
+#### 2.2.2 Declaring and Using Pointers:
+To declare a pointer, you use an asterisk * before the variable name. Here's how you declare and use a pointer:
+
+```c
+int number = 42;
+int *pointer;   // Declare a pointer to an integer
+
+pointer = &number;  // Assign the address of 'number' to 'pointer'
+
+printf("Value of number: %d\n", number);   // Prints 42
+printf("Value of pointer: %p\n", pointer); // Prints the memory address of 'number'
+```
+
+#### 2.2.3 Dereferencing a Pointer:
+Dereferencing a pointer means accessing the value stored at the memory address pointed to by the pointer. You use the dereference operator * to achieve this:
+
+```c
+int value = *pointer;  // Dereference 'pointer' to get the value at the memory address
+printf("Dereferenced value: %d\n", value); // Prints 42
+```
+
+#### 2.2.4 Pointers and Functions:
+Pointers are often used to pass data to functions by reference. This allows functions to modify the original data directly. Here's an example:
+
+```c
+void modifyValue(int *ptr) {
+    *ptr = 100;
+}
+
+int main() {
+    int num = 5;
+    modifyValue(&num); // Pass the address of 'num' to the function
+    printf("Modified value: %d\n", num); // Prints 100
+
+    return 0;
+}
+```
+
+#### 2.2.5 Pointer Arithmetic:
+You can perform arithmetic operations on pointers, which is useful for navigating arrays and data structures:
+
+```c
+int numbers[] = {10, 20, 30};
+int *ptr = numbers;  // Point to the first element
+
+printf("Value at ptr: %d\n", *ptr);  // Prints 10
+ptr++; // Move to the next element
+printf("Value at ptr after increment: %d\n", *ptr); // Prints 20
+```
+
+#### 2.2.6 Null Pointers:
+A null pointer is a pointer that doesn't point to any valid memory address. It's often used to indicate that a pointer doesn't currently point to any valid data.
+
+```c
+int *nullPtr = NULL;
+if (nullPtr == NULL) {
+    printf("Pointer is null.\n");
+}
+```
+
+### 2.3 Dynamic Memory Allocation:
+Pointers are essential for dynamic memory allocation using functions like malloc, calloc, and realloc. These functions allow you to allocate memory at runtime and work with complex data structures.
+
+```c
+int *dynamicArray = (int *)malloc(5 * sizeof(int)); // Allocate memory for an array
+// Use dynamicArray
+free(dynamicArray); // Release allocated memory when done
+```
+
+## 3. Functions
 A function is a self-contained block of code that performs a specific task. Functions in C are essential for modular and organized programming. They allow you to break down your code into smaller, manageable pieces that can be reused and tested independently.
 Here's how you declare and define a function in C:
 
@@ -179,14 +272,13 @@ int calculateSum(int a, int b) {
  - Readability: Well-named functions improve code readability and organization.
  - Testing: Isolating functionality in functions makes testing and debugging easier.
 
-## 3. Recursion:
-
+## 4. Recursion
 Recursion is a programming technique in which a function calls itself in order to solve a problem. Recursive functions have two main components:
 
-### 3.1 Base Case: 
+### 4.1 Base Case: 
 A condition that determines when the recursion should stop. It's the simplest case that can be solved directly without further recursive calls.
 
-### 3.2 Recursive Case: 
+### 4.2 Recursive Case: 
 The part of the function that calls itself with modified arguments, moving the problem towards the base case.
 
 Recursion is often used to solve problems that can be broken down into smaller, similar subproblems. It's important to make sure that each recursive call brings you closer to the base case; otherwise, the recursion won't terminate.
@@ -222,12 +314,12 @@ int main() {
 
 In this example, the factorial function calculates the factorial of a given number n using recursion. The base case is when n is 0 or 1, in which case the function returns 1. Otherwise, the function makes a recursive call by calculating (n - 1)! and multiplying it by n.
 
-### 3.3 Recursion vs. Iteration:
+### 4.3 Recursion vs. Iteration:
 Recursion is a powerful technique, but it can also lead to increased memory usage and potential stack overflow if not implemented carefully. In many cases, problems that can be solved recursively can also be solved using iterative approaches (loops). Both techniques have their strengths, and the choice depends on the problem and your coding style.
 
 When using recursion, it's important to ensure that the base case is reached and that each recursive call makes progress toward the base case. Understanding the call stack and the order of function calls is crucial for effectively implementing recursive algorithms.
 
-### 3.4 Memoization
+### 4.4 Memoization
 Memoization is a technique used to optimize recursive algorithms by storing the results of expensive function calls and returning the cached result when the same inputs occur again. This technique helps avoid redundant calculations and improves the overall efficiency of the algorithm.
 
 Memoization is particularly effective for recursive algorithms that exhibit overlapping subproblems, where the same subproblem is solved multiple times in a recursive chain. One classic example of such a problem is calculating Fibonacci numbers using recursion.
@@ -287,10 +379,10 @@ In this example, fib_cache is an array that stores the cached results of Fibonac
 
 Memoization dramatically reduces the number of redundant calculations and makes the Fibonacci algorithm much more efficient. This technique can be applied to a wide range of problems to optimize recursive algorithms.
 
-## 4. Structures
+## 5. Structures
 Structures, also known as "structs," are a fundamental data type in C that allow you to group together variables of different types under a single name. Structs provide a way to create user-defined data types that can represent complex objects.
 
-### 4.1 Defining and Using Structures:
+### 5.1 Defining and Using Structures:
 Here's how you define a structure in C:
 
 ```c
@@ -316,13 +408,13 @@ student1.age = 20;
 student1.grade = 85.5;
 ```
 
-### 4.2 Initializing Structures:
+### 5.2 Initializing Structures:
 You can initialize struct variables when they're declared:
 
 ```
 struct Student student2 = {"Alice", 22, 92.0};  // Initialize using values
 ```
-### 4.3 Structures and Functions:
+### 5.3 Structures and Functions:
 Structures can also be passed to functions. Here's an example of a function that takes a struct as a parameter:
 
 ```c
@@ -349,7 +441,7 @@ int main() {
 }
 ```
 
-### 4.4 Structs and Pointers:
+### 5.4 Structs and Pointers:
 Structs can also be used with pointers. Here's an example of dynamically allocating memory for a struct and accessing its members using a pointer:
 
 ```c
@@ -381,7 +473,7 @@ int main() {
 }
 ```
 
-### 4.5 Typedef:
+### 5.5 Typedef:
 You can use the typedef keyword to create a new name (also known as an alias) for a struct type. This allows you to use the new name without having to prefix it with struct each time you declare a variable of that type.
 
 Here's how you can use typedef to create an alias for a struct:
@@ -398,9 +490,89 @@ In this example, you're creating a struct _Vozlisce with three members: an integ
 
 Structures in C are powerful for organizing and representing data, creating more complex data types, and building more organized and modular programs. They are often used for representing real-world entities, such as students, employees, coordinates, and more.
 
+## 6. Linked lists
+Linked lists are a fundamental data structure used to organize and manage a collection of elements. They consist of nodes, where each node contains both data and a reference (or pointer) to the next node in the sequence. Linked lists are especially useful when you need dynamic memory allocation and efficient insertion and deletion of elements.
 
+### 6.1 Singly Linked List:
+A singly linked list consists of nodes where each node contains data and a pointer to the next node. The last node's pointer typically points to NULL to indicate the end of the list.
 
+```c
+struct Node {
+    int data;
+    struct Node* next;
+};
+```
 
+### 6.2 Doubly Linked List:
+A doubly linked list is similar to a singly linked list, but each node has both a pointer to the next node and a pointer to the previous node.
+
+```c
+struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+};
+```
+
+### 6.3 Operations on Linked Lists:
+1. Insertion: You can insert elements at the beginning, middle, or end of the linked list by updating the pointers of the adjacent nodes.
+2. Deletion: Deleting elements involves updating the pointers of the adjacent nodes to bypass the node you're deleting.
+3. Traversal: You can traverse the linked list by starting at the head and following the pointers to each subsequent node.
+
+### 6.4 Advantages of Linked Lists:
+
+1. Dynamic Size: Linked lists can grow or shrink as needed, unlike arrays.
+2. Insertion/Deletion: Adding or removing elements in a linked list is often more efficient than in an array.
+3. No Memory Waste: Linked lists can use memory more efficiently by allocating only the necessary memory for each element.
+
+### 6.5 Disadvantages of Linked Lists:
+1. More Memory Usage: Each node in the linked list requires additional memory for the pointer, which can be less memory-efficient compared to arrays.
+2. Slower Access Time: Accessing elements in a linked list can be slower than in arrays due to the need to traverse the list.
+
+Example: Singly Linked List: Here's a basic example of creating and using a singly linked list in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Vozlisce {
+    int podatek;
+    struct _Vozlisce* naslednje;
+} Vozlisce;
+
+// Function to insert a new node at the beginning of the list
+void insertAtBeginning(Vozlisce** glava, int value) {
+    Vozlisce* novoVozlisce = (Vozlisce*)malloc(sizeof(Vozlisce));
+    novoVozlisce->podatek = value;
+    novoVozlisce->naslednje = *glava;
+    *glava = novoVozlisce;
+}
+
+// Function to print the linked list
+void printList(Vozlisce* glava) {
+    Vozlisce* trenutno = glava;
+    while (trenutno != NULL) {
+        printf("%d ", trenutno->podatek);
+        trenutno = trenutno->naslednje;
+    }
+    printf("\n");
+}
+
+int main() {
+    Vozlisce* glava = NULL;  // Initialize an empty linked list
+
+    // Insert some elements at the beginning
+    insertAtBeginning(&glava, 3);
+    insertAtBeginning(&glava, 7);
+    insertAtBeginning(&glava, 12);
+
+    // Print the linked list
+    printf("Linked list: ");
+    printList(glava);
+
+    return 0;
+}
+```
 
 
 
