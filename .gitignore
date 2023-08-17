@@ -1,6 +1,7 @@
-.in
-.out
-.txt
-.bin
-.diff
-.res
+*.in
+*.out
+*.txt
+*.bin
+*.diff
+*.res
+*.dat
