@@ -46,7 +46,6 @@ Compilers typically process the source code in a top-to-bottom manner, starting 
 
 Throughout these steps, the compiler and other tools ensure that your code is correct and can be executed by the target machine's architecture.
 
-
 ### 1.2 Conditional statements
 Conditional statements are used to execute different blocks of code based on whether a condition is true or false. In C, the main conditional statement is the if statement. Here's the basic syntax:
 
@@ -115,6 +114,8 @@ switch (expression) {
 ```
 
 Remember that in each control construct, the curly braces {} are used to define the scope of the code that should be executed as a result of the condition being met.
+
+
 
 ## 2. Functions
 A function is a self-contained block of code that performs a specific task. Functions in C are essential for modular and organized programming. They allow you to break down your code into smaller, manageable pieces that can be reused and tested independently.
