@@ -271,6 +271,9 @@ int calculateSum(int a, int b) {
  - Reusability: Once a function is defined, it can be reused throughout your program.
  - Readability: Well-named functions improve code readability and organization.
  - Testing: Isolating functionality in functions makes testing and debugging easier.
+ 
+### 3.1 Useful facts:
+1. If you use scanf("%s", variable), it will read characters until it encounters a space, tab, or newline character (a whitespace character). 
 
 ## 4. Recursion
 Recursion is a programming technique in which a function calls itself in order to solve a problem. Recursive functions have two main components:
