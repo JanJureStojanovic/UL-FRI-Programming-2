@@ -1,7 +1,5 @@
-*.in
-*.out
-*.txt
-*.bin
+*.zip
+a.out
 *.diff
 *.res
-*.dat
+.vscode
