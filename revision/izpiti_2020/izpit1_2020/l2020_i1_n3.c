@@ -72,3 +72,5 @@ int main() {
 	// Izvedemo izpis
 	podmnozice(nums, podmn, n, 0);
 }
+
+

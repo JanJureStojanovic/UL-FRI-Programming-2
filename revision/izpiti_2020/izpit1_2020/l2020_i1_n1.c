@@ -56,7 +56,9 @@ int main(int argc, char* argv[]) {
 
 	free(txt);
 
-	// Je to sploh potrebno ?
+	// Je to sploh potrebno ?	
 	return 0;
 
 }
+
+
