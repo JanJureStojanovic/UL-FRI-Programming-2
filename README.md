@@ -36,3 +36,7 @@ You can also run the program manually using the following sequence of commands:
 gcc -o FileName FileName.c
 ./FileName
 ```
+
+## Caution
+The `Makefile` file might not be compatible with the provided tests in some folders. Consequently resulting in a Segmentation fault error at runtime. A modified Makefile was used in the ../revision/izpiti_2018/izpit1_2018/naloga2 folder, perhaps copying this Makefile and using it will fix the Segmentation fault timeout.
+
