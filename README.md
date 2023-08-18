@@ -13,9 +13,9 @@ This repository serves as a comprehensive collection of code and projects relate
 ```
 
 - `home_work`:
-    This years home work assignments
+    Home work assignments for the year 2022/23
 - `lab_exercises`:
-    Contains this years laboratoy exercices for each week of the semester
+    Laboratoy exercices for each week of the semester for the year 2022/23
 - `lectures`:
     Holds a summary of everything we learned in a README.md file 
 - `revision`:
