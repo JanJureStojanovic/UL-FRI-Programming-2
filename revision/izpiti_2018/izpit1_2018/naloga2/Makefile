@@ -64,9 +64,15 @@ test : ${name}
 	timeoutValue=${T}; \
 	hardTimeoutValue=$$((timeoutValue + 2)); \
 	\
+	${CC} ${CFLAGS} -c ${name}.c; \
+	\
 	for i0 in $$(seq $$firstTest $$lastTest); do \
 		i=$$(printf %0$${testNumberLength}d $$i0); \
-		${CC} ${CFLAGS} -e __main__ -o test$$i test$$i.c ${name}.c ${LIBS};\
+		${CC} ${CFLAGS} -c test$$i.c; \
+		objcopy --redefine-sym main=__uf8UGBF6DXffwIyX9KN46XL3F5jgqMvs__ ${name}.o; \
+		objcopy --redefine-sym __main__=main test$$i.o; \
+		${CC} -o test$$i test$$i.o ${name}.o ${LIBS}; \
+		rm -f test$$i.o; \
 		startTime=$$(date +%s.%N); \
 		timeout -k $${hardTimeoutValue} $${timeoutValue} ./test$$i > test$$i.res 2> /dev/null; \
 		result=$$?; \
