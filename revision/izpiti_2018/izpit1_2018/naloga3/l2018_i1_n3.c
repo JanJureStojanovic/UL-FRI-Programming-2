@@ -8,9 +8,12 @@ int sDiff(int* nums, int sum1, int sum2, int n, int i) {
         return abs(sum1 - sum2);
     }
     
+    // Clen premaknemo v sum2 podmnozico
     int a = sDiff(nums, sum1 - nums[i], sum2 + nums[i], n, i + 1);
+    // Clen pustimo pri miru in se premaknemo na naslednjega
     int b = sDiff(nums, sum1, sum2, n, i + 1);
     
+    // Izberemo najmanjso raliko (Moc podmnozic)
     if (a < b) {
         return a;
     }
