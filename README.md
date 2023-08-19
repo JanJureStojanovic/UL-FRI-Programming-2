@@ -38,5 +38,5 @@ gcc -o FileName FileName.c
 ```
 
 ## Caution
-The `Makefile` file might not be compatible with the provided tests in some folders. Consequently resulting in a Segmentation fault error at runtime. A modified Makefile was used in the ../revision/izpiti_2018/izpit1_2018/naloga2 folder, perhaps copying this Makefile and using it will fix the Segmentation fault timeout.
+The provided `Makefile` might not be fully compatible with the test cases included in certain directories, potentially leading to a runtime error known as a "Segmentation Fault." To address this issue, an adjusted version of the Makefile has been employed within the "../revision/izpiti_2018/izpit1_2018/naloga2" directory. It is advisable to consider duplicating and implementing this revised Makefile in your project to potentially resolve instances of the Segmentation Fault error.
 
