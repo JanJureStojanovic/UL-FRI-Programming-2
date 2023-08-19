@@ -1,6 +1,2 @@
 *.zip
-*.in
-*.out
-*.diff
-*.res
-*.bin
+*.vscode
