@@ -59,7 +59,7 @@ void izpis(char* niz, int dolzinaNiza) {
 }
 
 void komb(char* znaki, int stZnakov, char* niz, int dolzinaNiza, int i) {
-    printf("oj");
+
     // Smo napolnili niz, preverimo ce ga lahko izpisemo
     if (i == dolzinaNiza) { 
         if (nizJeVredu(niz, dolzinaNiza) == true) {
@@ -89,17 +89,10 @@ void komb(char* znaki, int stZnakov, char* niz, int dolzinaNiza, int i) {
 
 
 int main() {
-
-    int n;
-    scanf("%d ", &n);
-
-    char* znaki = malloc(n*sizeof(char));
-    for (int i = 0; i < n; i++) {
-        znaki[i] = getchar();
-    }
-
-    int len;
-    scanf(" %d", &len);
+    
+    char znaki[50];
+    int n, len;
+    scanf("%d %s %d", &n, znaki, &len);
     
     char* niz = calloc(len, sizeof(char));
 
