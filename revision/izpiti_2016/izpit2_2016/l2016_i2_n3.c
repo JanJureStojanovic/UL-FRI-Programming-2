@@ -1,28 +1,38 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#include <math.h>
 
-int main() {
-    // St. nivojev nasega drevesa
-    int n;
-    scanf("%d", &n);
-    int stEl = (1 << n) - 1;
+void print_prefixed_order(int *tree, int index, int size) {
     
-    int* nums = malloc(stEl*sizeof(int));
-    
-    int* izpis = calloc(stEl, sizeof(int));
-    
-    for (int i = 0; i < stEl; i++) {
-        scanf("%d", &nums[i]);
+    if (index >= size) {
+        return;
     }
+
+    printf("%d", tree[index]);
+
+    int left_child = 2 * index + 1;
+    int right_child = 2 * index + 2;
+
+    print_prefixed_order(tree, left_child, size); // Nadaljujemo po levi strani
+    print_prefixed_order(tree, right_child, size); // Nadaljujemo po desni strani
     
-    // Prvo stevilo bo vedno enako prvemu prebranemu stevilu;
-    izpis[0] = nums[0]
-    
-    // Sprememba
-    
+    // Ker vsakic najprej nadaljujemo po levi strani bo najprej izpisana leva stranica
 }
 
+int main() {
 
+    int k;
+    scanf("%d", &k);
+
+    int num_elements = pow(2, k) - 1;
+    int tree[num_elements];
+
+    for (int i = 0; i < num_elements; i++) {
+        scanf("%d", &tree[i]);
+    }
+
+    print_prefixed_order(tree, 0, num_elements);
+    printf("\n");
+
+    return 0;
+}
 
