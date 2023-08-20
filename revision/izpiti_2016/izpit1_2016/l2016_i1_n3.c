@@ -37,6 +37,28 @@ int dolzina_podzaporedja(int* nums, int x, int y, int n) {
 	return b;
 }
 
+int len(int* nums, int n, int deljenec, int i) {
+    
+    if (i == n) {
+        return 0;
+    }
+    
+    int a, b;
+    
+    for (int j = i; j < n; j++) {
+        if (deljenec % nums[i] == 0) {
+            a = 1 + len(nums, n, nums[i], i + 1); // vzamemo stevilo in zamenjamo deljenca
+            b = len(nums, n, deljenec, i + 1); // ne vzamemo stevila in pustimo isti deljenec;
+            break;
+        }
+    } 
+    
+    if (a > b) {
+        return a;
+    }
+    return b;  
+}
+
 
 int main() {
 
@@ -66,4 +88,5 @@ int main() {
 
 	// Izpisemo dolzino najdaljsega podzaporedja
 	printf("%d\n", dolzina_podzaporedja(nums, 0, 1, n) + 1);
+	printf("%d\n", len(nums, n, nums[0], 0) + 1);
 }
