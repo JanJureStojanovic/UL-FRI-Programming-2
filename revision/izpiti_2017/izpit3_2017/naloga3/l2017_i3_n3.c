@@ -5,41 +5,39 @@
 int main() {
 
     char filename[21];
-    scanf("%20s", filename);
+    scanf("%s", filename);
 
     FILE *file = fopen(filename, "rb");
 
     char P6[3];
     int width, height, max_color;
-    fscanf(file, "%2s %d %d %d", P6, &width, &height, &max_color);
+    fscanf(file, "%2s %d %d %d\n", P6, &width, &height, &max_color);
 
-    unsigned char* colors = malloc (3*width*height*sizeof(unsigned char));
+    unsigned char* colors = malloc(3*width*height*sizeof(unsigned char));
+
     fread(colors, sizeof(unsigned char), 3*width*height, file);
     
     int stRazlicnih = 0;
     
-    for (int i = 3; i < 3 * width * height; i += 3) {
-        
-        bool prvic = true;
+    for (int a = 3; a < 3 * width * height; a += 3) {
 
-        for (int j = i - 3; j >= 0; j -= 3) {
+        bool enakost = false;
+
+        for (int b = a - 3; b >= 0; b -= 3) {
             
-            if (colors[j] == colors[i] &&
-                colors[j + 1] == colors[i + 1] &&
-                colors[j + 2] == colors[i + 2]) {
-                
-                prvic = false;
+            if (colors[b] == colors[a] && colors[b + 1] == colors[a + 1] && colors[b + 2] == colors[a + 2]) {
+ 
+                enakost = true;
                 break;
             }
         }
-        printf("\n");
     
-        if (prvic == true) {
+        if (enakost == false) {
             stRazlicnih++;
         }
     }
 
-    
+    printf("%d\n", width*height);
     printf("%d\n", stRazlicnih + 1);
 
     return 0;
