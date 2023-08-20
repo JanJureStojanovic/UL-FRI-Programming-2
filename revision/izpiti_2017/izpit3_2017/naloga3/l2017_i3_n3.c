@@ -36,9 +36,25 @@ int main() {
             stRazlicnih++;
         }
     }
-
-    printf("%d\n", width*height);
-    printf("%d\n", stRazlicnih + 1);
-
+    
+    int curMax = 0;
+    int counter;
+    
+    for (int i = 0; i < 3*width*height; i += 3) {
+        counter = 0;
+        for (int j = 0; j < 3*width*height; j += 3) {
+            if (colors[i] == colors[j] && colors[i + 1] == colors[j + 1] && colors[i + 2] == colors[j + 2]) {
+                counter++;
+            }
+        }
+        if (counter > curMax) {
+            curMax = counter;
+        }
+    }
+    
+    
+    printf("%d\n", stRazlicnih + 1); // Plus ena, ker stejemo zraven se prvi element
+    printf("%d\n", curMax);
+    
     return 0;
 }
