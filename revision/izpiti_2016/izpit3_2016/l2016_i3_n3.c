@@ -3,54 +3,70 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool allOnes(int* nums, int n) {
+bool allDiff(int* nums, int n) {
     for (int i = 0; i < n; i++) {
-        if (nums[i] != 1) {
-            return false;
+        for (int j = 0; j < n; j++) {
+            if (i != j && nums[i] == nums[j]) {
+                return false;
+            }
         }
     }
     return true;
 }
 
+void izpis(int* nums, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d", nums[i]);
+        if (i != n - 1) {
+            printf("->");
+        }
+    }
+    printf("\n");
+    return;
+}
+
     
-int rekurzija(int sum, int* nums, int a, int b, int n, int kjeSmo, int stKorakov) {
+int rek(int* nums, int n, int a, int b, int i, int j) {
     
-    if (stKorakov >= n) {
+    if (i < 0 || i >= n) { // Skočimo dol iz kamnov
         return 0;
     }
-    
-    if (allOnes(nums, n) == true) {
-        return 1;
-    }    
-    
-    nums[kjeSmo] += 1;
-    
-    int dodatek;
-    
-    for (int i = a; i <= b; i++) {
-        int* numsx = calloc(n, sizeof(int));
-        for (int j = 0; j < n; j++) {
-            numsx[j] == nums[j];
+
+    if (j == n) {
+    izpis(nums, n);
+        if (allDiff(nums, n) == true) {
+            izpis(nums, n);
+            return 0;
+        } else {
+            
+            return 0;
         }
-        
-        if (kjeSmo + i < n) {
-            dodatek = rekurzija(sum, numsx, a, b, n, kjeSmo + i, stKorakov + 1);
-        }
-        sum += dodatek;
     }
     
-    for (int i = a; i <= b; i++) {
-        int* numsx = calloc(n, sizeof(int));
-        for (int j = 0; j < n; j++) {
-            numsx[j] == nums[j];
+    
+    
+    int c, d;
+    
+    for (int p = a; p <= b; p++) {
+    
+        // Dodajamo in odstevamo p;
+        int* noviNums1 = calloc(n, sizeof(int));
+        int* noviNums2 = calloc(n, sizeof(int));
+        
+        for (int l = 0; l < n; l++) {
+            noviNums1[l] = nums[l];
+            noviNums2[l] = nums[l];
         }
         
-        if (kjeSmo - i > -1) { 
-            dodatek = rekurzija(sum, numsx, a, b, n, kjeSmo - i, stKorakov + 1);
-        }
-        sum += dodatek;
+        noviNums1[j] = i - p;
+        noviNums2[j] = i + p;
+        
+        c = c + rek(noviNums1, n, a, b, i - p, j + 1);
+        d = d + rek(noviNums1, n, a, b, i + p, j + 1);
     }
-    return sum;
+    
+    return a + b;
+    
 }
 
 int main() {
@@ -59,8 +75,8 @@ int main() {
     scanf("%d %d %d", &n, &a, &b);
     
     int* nums = calloc(n, sizeof(int));
-    
-    int odg = rekurzija(0, nums, a, b, n, 0, 0);
+    nums[0] = 0;
+    int odg = rek(nums, n, a, b, 0, 1);
     
     printf("%d\n", odg);
     
