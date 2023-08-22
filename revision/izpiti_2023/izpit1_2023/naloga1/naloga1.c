@@ -1,4 +1,3 @@
-
 /*
  * Zagon testne skripte ("sele potem, ko ste prepri"cani, da program deluje!):
  *
